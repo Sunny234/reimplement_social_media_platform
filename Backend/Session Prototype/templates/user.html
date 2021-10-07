@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Test</title>
+</head>
+<body>
+    <center>
+    <h1>Logged in as: {{user}}</h1>
+        <h2>Like Count</h2>
+        <h3>{{likes}}</h3>
+        <form action=" " method="POST">
+            <button name = "like" value="like">Like</button>
+        </form>
+        <p></p>
+        <form action="http://127.0.0.1:5000/logout">
+        <input type="submit" value="Logout" />
+    </form>
+    </center>
+</body>
+</html>
