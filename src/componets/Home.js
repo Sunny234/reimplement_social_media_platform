@@ -4,7 +4,7 @@ import Feed from "./Feed";
 
 const Home = () => {
     return (
-        <div class="main-home">
+        <div className="main-home">
             <Feed/>
             <CreateTweet/>
         </div>

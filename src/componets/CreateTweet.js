@@ -1,15 +1,16 @@
 import React from 'react'
 
-function postTweet() {
-    alert("Post Tweet")
+function postTweet(e) {
+    e.preventDefault();
+    console.log("adf");
 }
 
 const CreateTweet = () => {
     return (
-        <div className="create-tweet">
+        <form className="create-tweet" onSubmit={postTweet}>
             <textarea className="create-tweet-text" placeholder="Write something..." type="text"></textarea>
-            <button onClick={postTweet} className="create-tweet-button">Tweet</button>
-        </div>
+            <button onClick={postTweet} type="submit" className="create-tweet-button">Tweet</button>
+        </form>
     )
 }
 

@@ -1,14 +1,12 @@
 import React from 'react'
-import SidebarButton from './SidebarButton'
+import signInButton from "../sign-in-with-twitter-gray.png.twimg.2560.png"
 
 const LoginButton = () => {
     return (
-        <div className="login-button-text">
-            <SidebarButton text="Login with Twitter" URL="/home"/>
+        <div className="login-button">
+            <a href="/home"><img src={signInButton} alt="Sign into Twitter"/></a>
         </div>
     )
 }
 
 export default LoginButton
-
-
