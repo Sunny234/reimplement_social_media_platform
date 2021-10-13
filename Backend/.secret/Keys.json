@@ -1,0 +1,13 @@
+{
+    "AWS": {
+            "AWS_ACCESS_KEY" : "AKIAUYDS5BNG6JM7AIBI",
+            "AWS_ACCESS_KEY_SECRET" : "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"
+        },
+    "Twitter": {
+            "API_KEY" : "tYAga0fPzoEXzwf3GZ9EzRIIJ",
+            "API_KEY_SECRET" : "xfrXLbK3Yezo7s0b8E9JwoSK4mBUWDvVAyy1spuefUWLsM226I",
+            "BEARER_TOKEN" : "AAAAAAAAAAAAAAAAAAAAAGL2TgEAAAAAHSZ8H0FqnrQ7a%2BKCsluw%2Fh%2FgAqM%3DmCPPvS4Fswv06ImVShW6HG6vlT1iRcpyVI3LKja8EZrF3YCxb3",
+            "ACCESS_TOKEN" : "1437922301371052038-Da4n64yb8jOiAbkNcghw3Vvvrk99J2",
+            "ACCESS_TOKEN_SECRET" : "1yswVuFWGfgkOmQW5XgRQQwvlzx7MZEdIzt2R0zj7nB1D"
+        }
+}

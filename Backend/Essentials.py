@@ -1,22 +1,30 @@
-import tweepy, os
+import tweepy, os, sys
 import boto3, botocore
+import json, time
+
+def get_keys(path):
+    with open(path) as f:
+        return json.load(f)
+
+API_KEYS = get_keys("Backend/.secret/Keys.json")
+SECRET = API_KEYS['AWS']['AWS_ACCESS_KEY']
 
 #AWS keys
-AWS_ACCESS_KEY = "AKIAUYDS5BNG6JM7AIBI"
-AWS_ACCESS_KEY_SECRET = "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"
-AWS_DEFAULT_REGION = "us-west-1"
+AWS_ACCESS_KEY = API_KEYS['AWS']['AWS_ACCESS_KEY'] 
+AWS_ACCESS_KEY_SECRET = API_KEYS['AWS']['AWS_ACCESS_KEY_SECRET']
 
 #Twitter API keys
-API_KEY = "tYAga0fPzoEXzwf3GZ9EzRIIJ"
-API_KEY_SECRET = "xfrXLbK3Yezo7s0b8E9JwoSK4mBUWDvVAyy1spuefUWLsM226I"
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGL2TgEAAAAAHSZ8H0FqnrQ7a%2BKCsluw%2Fh%2FgAqM%3DmCPPvS4Fswv06ImVShW6HG6vlT1iRcpyVI3LKja8EZrF3YCxb3"
-ACCESS_TOKEN = "1437922301371052038-Da4n64yb8jOiAbkNcghw3Vvvrk99J2"
-ACCESS_TOKEN_SECRET = "1yswVuFWGfgkOmQW5XgRQQwvlzx7MZEdIzt2R0zj7nB1D"
+API_KEY = API_KEYS['Twitter']['API_KEY']
+API_KEY_SECRET = API_KEYS['Twitter']['API_KEY_SECRET']
+BEARER_TOKEN = API_KEYS['Twitter']['BEARER_TOKEN']
+ACCESS_TOKEN = API_KEYS['Twitter']['ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = API_KEYS['Twitter']['ACCESS_TOKEN_SECRET']
 
 #authentication
 auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth,wait_on_rate_limit = True)
+api = tweepy.API(auth, wait_on_rate_limit = True)
+
 
 #s3 Bucket obj
 s3_bucket = boto3.client(
@@ -31,6 +39,8 @@ dynamodb_init = boto3.resource(
     aws_access_key_id = AWS_ACCESS_KEY,
     aws_secret_access_key = AWS_ACCESS_KEY_SECRET
 )
+
+table = dynamodb_init.Table('user_info')
 
 #-------------------------------------------------------
 #                       Functions
@@ -51,3 +61,8 @@ def download_from_bucket(bucket, object_key, filename):
             print("The object you are looking for does not exist.")
         else:
             raise
+
+'''
+remaining_rate = api.rate_limit_status()
+print(remaining_rate['resources']['statuses'])
+'''
