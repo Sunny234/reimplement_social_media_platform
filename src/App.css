@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.main-container {
+    display: flex;
+}
+
+.search {
+    background-color: rgb(40, 40, 40);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    width: 100vw;
+}
+
+.search .search-box {
+    background-color: rgb(50, 50, 50);
+    height: 50%;
+    width: 50vw;
+    border: none;
+    outline: none;
+    border-radius: 2em;
+    padding: 0 1%;
+}
+
+.sidebar {
+    background-color: rgb(50, 50, 50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:20vw;
+    height: 93vh;
+    margin-top: 7vh;
+}
+
+.sidebar ul li {
+    align-items: center;
+    list-style: none;
+    margin-bottom: 25%;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: large;
+    padding: 1em 3em;
+    border-radius: 2em;
+    transition: 300ms ease-in-out;
+}
+
+.sidebar ul li a:hover {
+    background-color: rgb(60, 60, 60);;
+}
+
+.sidebar ul li .sign-out-button {
+    background-color: rgb(150, 0, 0);
+    transition: 300ms ease-in-out;
+}
+
+.sidebar ul li .sign-out-button:hover {
+    background-color: rgb(201, 0, 0);
+}
+
+.feed {
+    background-color: rgb(60, 60, 60);
+    height: 66vh;
+    width: 80vw;
+    overflow-y: auto;
+    margin-top: 7vh;
+    margin-bottom: 25vh;
+}
+
+.feed .tweet-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 1%;
+    border-bottom: 1px rgb(139, 139, 139) solid;
+}
+
+.feed .tweet-container .tweet-content {
+    margin-left: 7%;
+}
+
+.feed .tweet-container a img {
+    height: 75px;
+    border-radius: 50%;
+}
+
+.create-tweet {
+    background-color: rgb(55, 55, 55);
+    position: fixed;
+    bottom: 0;
+    left: 20vw;
+    right: 0;
+    height: 25vh;
+    padding: 1vh;
+}
+
+.create-tweet .create-tweet-button {
+    background-color: rgb(0, 190, 190);
+    border: 1px solid gray;
+    height: 3em;
+    width: 7em;
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    border-radius: 100px;
+    transition: 300ms ease-in-out;
+}
+
+.create-tweet .create-tweet-button:hover {
+    background-color: rgb(0, 255, 255);
+}
+
+.create-tweet .create-tweet-text {
+    background-color: rgb(60, 60, 60);
+    border: none;
+    height: 65%;
+    width: 98%;
+    outline: none;
+    resize: none;
+    font-family: sans-serif;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(60, 60, 60);
+    width: 100vw;
+    height: 100vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
