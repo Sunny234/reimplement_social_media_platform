@@ -1,17 +1,27 @@
 import React from 'react'
 
-function postTweet(e) {
-    e.preventDefault();
-    console.log("adf");
-}
+const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList }) => {
 
-const CreateTweet = () => {
+    const tweetInputHandler = (e) => {
+        setTweetInput(e.target.value);
+    };
+
+    const submitTweetHandler = (e) => {
+        e.preventDefault();
+        //Send Tweet to DB/Twitter
+        setTweetsList([
+            ...tweetsList, 
+            { user: "Nathan Grove", tweet_content: tweetInput, in_reply_to: null, id: Math.random() * 1000 },
+        ]);
+        setTweetInput("");
+    };
+
     return (
-        <form className="create-tweet" onSubmit={postTweet}>
-            <textarea className="create-tweet-text" placeholder="Write something..." type="text"></textarea>
-            <button onClick={postTweet} type="submit" className="create-tweet-button">Tweet</button>
+        <form className="create-tweet">
+            <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Tell your story..." type="text" value={tweetInput}></textarea>
+            <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
         </form>
     )
-}
+};
 
-export default CreateTweet
+export default CreateTweet;

@@ -6,6 +6,6 @@ const Search = () => {
             <input className="search-box" type="text" placeholder="Search"></input>
         </div>
     )
-}
+};
 
-export default Search
+export default Search;

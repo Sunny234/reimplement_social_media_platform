@@ -4,6 +4,6 @@ const SidebarButton = ({text, URL}) => {
     return (
         <a className="sidebar-button-text" href={URL}>{text}</a>
     )
-}
+};
 
-export default SidebarButton
+export default SidebarButton;

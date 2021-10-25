@@ -4,6 +4,6 @@ const SignOutButton = ({text, URL}) => {
     return (
         <a className="sign-out-button" href={URL}>{text}</a>
     )
-}
+};
 
-export default SignOutButton
+export default SignOutButton;
