@@ -1,19 +1,22 @@
-from Essentials import *
-import webbrowser
+import tweepy
+import json
+import os
 
 def Login():
+    c = os.environ['API_KEY']
+    d = os.environ['API_KEY_SECRET']
     callback_URL = "oob"
-    login = tweepy.OAuthHandler(a['Item']['value'], b['Item']['value'], callback_URL)
+    login = tweepy.OAuthHandler(c, d, callback_URL)
     redirect_URL = login.get_authorization_url()
-    print(redirect_URL)
-    webbrowser.open(redirect_URL)
-    validation_PIN = input("Enter PIN: ")
-    tokens = login.get_access_token(validation_PIN)
-    #print(tokens)
-    #print(login.access_token, login.access_token_secret)
-    return validation_PIN, tokens
+    return redirect_URL
 
 def lambda_handler(event, context):
-    Login()
-
-#Login()
+    return {
+        'headers': {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+            },
+        'statusCode' : 200,
+        'body' : Login()
+    }

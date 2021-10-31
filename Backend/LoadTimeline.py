@@ -1,26 +1,29 @@
-from Essentials import *
+import tweepy
+import json
+import os
 
 def LoadTimeline():
-    def FetchTimeline(cursor, timeline):
-        #Converts status obj to json obj and writes json obj to a .json file
-        for i in range(len(cursor)):
-            userTweet = cursor[i]
-            f = json.dumps(userTweet._json, ensure_ascii = False, indent = 4)
-            #Appends json files to a list of files, creating a timeline
-            timeline.append(f)
-            twt = open("Tweet {}.json".format(i + 1), "w")
-            twt.write(f)
-            twt.close
-        print(timeline)
-        return timeline
-
+    c = os.environ['API_KEY']
+    d = os.environ['API_KEY_SECRET']
+    e = os.environ['ACCESS_TOKEN']
+    f = os.environ['ACCESS_TOKEN_SECRET']
+    auth = tweepy.OAuthHandler(c, d)
+    auth.set_access_token(e, f)
+    api = tweepy.API(auth, wait_on_rate_limit = True)
     cursor = api.user_timeline()
     timeline = []
-    FetchTimeline(cursor, timeline)
-    
-#Required to function with AWS Lambda
+    for i in range(len(cursor)):
+        userTweet = cursor[i]
+        f = json.dumps(userTweet._json, ensure_ascii = False, indent = 4)
+        timeline.append(f)
+    return timeline
+        
 def lambda_handler(event, context):
-    LoadTimeline()
-
-#For testing code on local machine
-LoadTimeline()
+    return {
+        'headers': {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+            },
+        'body' : LoadTimeline()
+    }
