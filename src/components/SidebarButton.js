@@ -1,8 +1,10 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
+
 
 const SidebarButton = ({text, URL}) => {
     return (
-        <a className="sidebar-button-text" href={URL}>{text}</a>
+        <Link to={URL} className="sidebar-button-text">{text}</Link>
     )
 };
 

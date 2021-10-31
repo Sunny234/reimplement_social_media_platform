@@ -1,12 +1,13 @@
 import React from 'react'
 import LoginButton from './components/LoginButton'
-import logo from './images/rambler.png';
 
 const Login = () => {
 
     return (
         <div className="login-container">
-            <img src={logo} alt="Rambler" className="login-logo"></img>
+            <span>
+                <h4>R</h4><i className="fas fa-dove fa-3x" style={{color: "#FF6C00"}}></i><h4>mbler</h4>
+            </span>
             <LoginButton/>
         </div>
     )

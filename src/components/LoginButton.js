@@ -5,19 +5,18 @@ const LoginButton=()=> {
 
     const loginUser = () => {
         const axios = require('axios');
-        const data = '';
 
         const config = {
         method: 'get',
-        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/Login',
+        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/Login2',
         headers: { },
-        data : data
         };
 
         axios(config)
         .then(function (response) {
-            window.open(response.data, '_blank').focus();
-            window.location.href="/pin";
+            console.log(JSON.stringify(response.data));
+            // window.open(response.data, '_blank').focus();
+            // window.location.href="/pin";
         })
         .catch(function (error) {
             console.log(error);

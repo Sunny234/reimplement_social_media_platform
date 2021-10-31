@@ -1,8 +1,10 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
+
 
 const SignOutButton = ({text, URL}) => {
     return (
-        <a className="sign-out-button" href={URL}>{text}</a>
+        <Link to={URL} className="sign-out-button">{text}</Link>
     )
 };
 
