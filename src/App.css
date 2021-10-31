@@ -5,6 +5,10 @@
     font-size: 16px;
 }
 
+.link {
+    text-decoration: none;
+}
+
 .main-container {
     display: flex;
 }
@@ -105,11 +109,19 @@
     margin-bottom: 25vh;
 }
 
+.single-main-container {
+    background-color: rgb(60, 60, 60);
+    height: 76vh;
+    width: 80vw;
+    overflow-y: auto;
+    margin-top: 7vh;
+    margin-bottom: 15vh;
+}
+
 .feed .tweet-container {
     margin-left: 5%;
     margin-right: 5%;
     padding: 2%;
-    
 }
 
 .feed .tweet-container img {
@@ -190,6 +202,49 @@
     background-color: rgb(70,70,70);
 }
 
+.reply-tweet {
+    background-color: rgb(55, 55, 55);
+    position: fixed;
+    bottom: 0;
+    left: 20vw;
+    right: 0;
+    height: 15vh;
+    padding: 1vh;
+}
+
+.reply-tweet .create-tweet-button {
+    background-color: rgb(0, 190, 190);
+    border: none;
+    padding: 0.7em 1.7em;
+    position: fixed;
+    right: 1%;
+    bottom: 2%;
+    text-align: center;
+    border-radius: 100px;
+    transition: 300ms ease-in-out;
+}
+
+.reply-tweet .create-tweet-button:hover {
+    background-color: rgb(0, 255, 255);
+}
+
+.reply-tweet .create-tweet-text {
+    background-color: rgb(60, 60, 60);
+    border: none;
+    height: 5vh;
+    width: 98%;
+    outline: none;
+    resize: none;
+    font-family: sans-serif;
+    padding: 1%;
+    border-radius: 5px;
+    transition: 100ms ease-in-out;
+}
+
+.reply-tweet .create-tweet-text:hover {
+    background-color: rgb(70,70,70);
+}
+
 .login-container {
     display: flex;
     align-items: center;
@@ -249,17 +304,25 @@
 
 .profile {
     background-color: rgb(60, 60, 60);
-    height: 66vh;
     width: 80vw;
     overflow-y: auto;
     margin-top: 7vh;
-    margin-bottom: 25vh;
+}
+
+.profile-container {
+    padding: 5%;
 }
 
 .profile img {
     height: 15vh;
+    float: left;
     border-radius: 25em;
-    margin: 5% 5% 3% 3%;
+    margin-right: 3vw;
+}
+
+.profile h1 {
+    display: inline;
+    font-size: 2em;
 }
 
 /* width */

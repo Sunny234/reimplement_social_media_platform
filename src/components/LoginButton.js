@@ -15,8 +15,9 @@ const LoginButton=()=> {
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
-            // window.open(response.data, '_blank').focus();
-            // window.location.href="/pin";
+            window.open(response.data["URL"], '_blank').focus();
+            window.sessionStorage.setItem('id', response.data["ID"]);
+            window.location.href="/pin";
         })
         .catch(function (error) {
             console.log(error);

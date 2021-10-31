@@ -6,11 +6,9 @@ import {useParams } from 'react-router-dom';
 
 const SearchResults = () => {
 
-    const [tweetsList, setTweetsList] = useState([]);
+    const [resultsList, setResultsList] = useState([]);
     const { searchTerm } = useParams();
     const [searchInput, setSearchInput] = useState(`${searchTerm}`);
-   
-    //setSearchInput(searchInput, query);
 /*
     const axios = require('axios');
     const data = '1450591326479831040';
@@ -40,7 +38,7 @@ const SearchResults = () => {
         <div className="search-results-container">
             <Search searchInput = {searchInput} setSearchInput={setSearchInput}/>
             <Sidebar/>
-            <Feed tweetsList={tweetsList} styles="feed_search" setTweetsList={setTweetsList}/>
+            <Feed tweetsList={resultsList} styles="feed_search" setTweetsList={setResultsList}/>
         </div>
         
     )

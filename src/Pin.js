@@ -4,12 +4,14 @@ const PIN = () => {
 
     const submitPinHandler = (e) => {
         e.preventDefault();
+        console.log(typeof(e.target.value));
+        console.log((typeof(window.sessionStorage.getItem("id"))));
         if(e.target.value.length === 7) {
             const axios = require('axios');
-            const data = e.target.value;
+            const data = { "ID": window.sessionStorage.getItem("id"), "PIN": e.target.value};
             const config = {
                 method: 'post',
-                url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/GetPIN/',
+                url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/GetPIN',
                 headers: { 
                     'Content-Type': 'text/plain',
                 }, 
@@ -25,7 +27,7 @@ const PIN = () => {
             });
         }
     };
-    window.sessionStorage.setItem('token', '34234112341234');
+
     return (
         <div className="pin-container">
             <form>

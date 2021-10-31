@@ -87,7 +87,7 @@ const MainHome = () => {
             <Search searchInput = {searchInput} setSearchInput={setSearchInput}/>
             <Sidebar/>
             <Feed tweetsList={tweetsList} styles="feed" setTweetsList={setTweetsList}/>
-            <CreateTweet tweetsList={tweetsList} setTweetsList={setTweetsList} tweetInput={tweetInput} setTweetInput={setTweetInput} />
+            <CreateTweet tweetsList={tweetsList} setTweetsList={setTweetsList} tweetInput={tweetInput} setTweetInput={setTweetInput} styles="create-tweet" />
         </div>
     )
 };

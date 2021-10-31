@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Tweet = ({user, screen_name, profile_image, tweet_content, in_reply_to, retweeted_user, retweeted_screen_name, retweeted_profile_image, retweeted_text, is_quote_status, retweet_count, favorite_count, id }) => {
 
     const viewSingleTweetHandler = (e) => {
-        console.log(id);
+        return `/${id}`;
     };
     
     const isReply = () => {
@@ -36,11 +37,13 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, in_reply_to, re
     }
 
     return (
-        <div onClick={viewSingleTweetHandler} className="tweet-hover">
-            <div className="tweet">
-                {isRetweet()}
+        <Link to={viewSingleTweetHandler} className="link">
+            <div className="tweet-hover">
+                <div className="tweet">
+                    {isRetweet()}
+                </div>
             </div>
-        </div>
+        </Link>
     )
 };
 

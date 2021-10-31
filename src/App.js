@@ -17,9 +17,9 @@ const App = () => {
                     <Route exact path="/home" component={MainHome}/>
                     <Route exact path="/profile" component={Profile}/>
                     <Route exact path="/pin" component={Pin}/>
-                    <Route exact path="/pin" component={IndividualTweet}/>
-                    <Route path="/search" component={SearchResults}/>
+                    <Route exact path="/search" component={SearchResults}/>
                     <Route path="/search/:searchTerm" component={SearchResults}/>
+                    <Route path="/:id" component={IndividualTweet}/>
                 </Switch>
             </Router>
         </div>

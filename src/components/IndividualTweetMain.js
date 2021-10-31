@@ -1,12 +1,17 @@
 import React from 'react'
 import Tweet from './Tweet'
 
- const IndividualTweetMain = ({ tweetsList, setTweetsList }) => {
+ const IndividualTweetMain = () => {
+
+    //Get tweet ID in here somehow
+    //Use ReadTweet to get the contents of that Tweet
+    //Display Tweet
 
     return (
-        <div className="feed">
-            {tweetsList.map((tweet)=>
-                <Tweet tweetsList={tweetsList} id={tweet.id} user = {tweet.user} tweet_content = {tweet.tweet_content} in_reply_to = {tweet.in_reply_to} key = {tweet.id} />)}
+        <div>
+            <div className="single-main-container">
+                <h4>fasdf</h4>
+            </div>
         </div>
     )
 };

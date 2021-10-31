@@ -10,7 +10,7 @@ const IndividualTweet = () => {
             <Search/>
             <Sidebar/>
             <IndividualTweetMain/>
-            <CreateTweet/>
+            <CreateTweet styles="reply"/>
         </div>
     )
 };
