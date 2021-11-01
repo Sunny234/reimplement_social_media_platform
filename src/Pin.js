@@ -9,13 +9,15 @@ const PIN = () => {
         if(e.target.value.length === 7) {
             const axios = require('axios');
             const data = { "ID": window.sessionStorage.getItem("id"), "PIN": e.target.value};
+            console.log(data)
+            const new_data = JSON.stringify(data);
             const config = {
                 method: 'post',
                 url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/GetPIN',
                 headers: { 
-                    'Content-Type': 'text/plain',
+                    'Content-Type': 'application/json',
                 }, 
-                data: data,
+                data: new_data,
             };
 
             axios(config)

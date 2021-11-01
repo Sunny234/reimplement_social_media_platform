@@ -20,7 +20,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         if(styles === "reply") {
             return (
                 <form className="reply-tweet">
-                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Say your side..." type="text" value={tweetInput}></textarea>
+                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Placerholder Tweet Reply..." type="text" value={tweetInput}></textarea>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
                 </form>
             )

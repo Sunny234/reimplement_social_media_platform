@@ -24,7 +24,7 @@ const MainHome = () => {
         var axios = require('axios');
 
         var config = {
-        method: 'get',
+        method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/LoadTimeline',
         headers: { 
             'Content-Type': 'text/plain'
@@ -68,7 +68,7 @@ const MainHome = () => {
                     favorite_count: favorite_count,
                     id: tweet_id 
                 });
-                console.log("ADDED!");
+                console.log("ADDED");
             }
         }
         setTweetsList(tweetList);

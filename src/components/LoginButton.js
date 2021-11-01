@@ -7,7 +7,7 @@ const LoginButton=()=> {
         const axios = require('axios');
 
         const config = {
-        method: 'get',
+        method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/Login2',
         headers: { },
         };

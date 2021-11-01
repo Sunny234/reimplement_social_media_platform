@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 const Tweet = ({user, screen_name, profile_image, tweet_content, in_reply_to, retweeted_user, retweeted_screen_name, retweeted_profile_image, retweeted_text, is_quote_status, retweet_count, favorite_count, id }) => {
 
     const viewSingleTweetHandler = (e) => {
-        return `/${id}`;
+        return `/tweet/${id}`;
     };
     
     const isReply = () => {
