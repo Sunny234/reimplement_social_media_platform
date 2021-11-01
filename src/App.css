@@ -115,7 +115,7 @@
     width: 80vw;
     overflow-y: auto;
     margin-top: 7vh;
-    margin-bottom: 15vh;
+    margin-bottom: 0vh;
 }
 
 .feed .tweet-container {

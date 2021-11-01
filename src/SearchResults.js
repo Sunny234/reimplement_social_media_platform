@@ -44,8 +44,9 @@ const SearchResults = () => {
     //Fetch Timeline
     //Get Tweets from Timeline into State
     const getTweets = () => {
+        console.log(searchTerm)
         var axios = require('axios');
-        let data = searchInput ;//{"searchQuery":searchInput, "token": "tYAga0fPzoEXzwf3GZ9EzRIIJ", "secret":"xfrXLbK3Yezo7s0b8E9JwoSK4mBUWDvVAyy1spuefUWLsM226I"}
+        let data = {"searchQuery":searchInput, "token": "1454729415011700738-ib7ql4SU5vag2PBOtoMAeFPc2dyxXF", "secret":"osxGjJfDEvQEc0oiWlefuyFM7IQbkj8FhrsXOMHpCvuJ1"}
         var config = {
         method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/SearchTweets',
@@ -56,6 +57,7 @@ const SearchResults = () => {
         };
         axios(config)
         .then(function (response) {
+            console.log(`${response.data[0]}`)
         for(let x in response.data) {
             let username = response.data[x]["user"]["name"];
             let screen_name = response.data[x]["user"]["screen_name"];

@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useRef} from 'react'
 import Tweet from './Tweet'
+import Feed from './Feed'
 
  const IndividualTweetMain = ({tweetID}) => {
 
     let tweet = {};
+    let tweetList = [];
+    const tweetsList = useRef([]);
+    const [alreadyDid, setAlreadyDid] = useState(false);
+
     //Get tweet ID in here somehow
     //Use ReadTweet to get the contents of that Tweet
     //Display Tweet
     const getIndividualTweet = () => {
+        if (alreadyDid == false)
+        {  
         var axios = require('axios');
         console.log("here");
-        let data = {"id": `${tweetID}`, "token": "tYAga0fPzoEXzwf3GZ9EzRIIJ", "secret": "xfrXLbK3Yezo7s0b8E9JwoSK4mBUWDvVAyy1spuefUWLsM226I"};
+        let data = {"id": tweetID, "token": "1454729415011700738-ib7ql4SU5vag2PBOtoMAeFPc2dyxXF", "secret": "osxGjJfDEvQEc0oiWlefuyFM7IQbkj8FhrsXOMHpCvuJ1"};
         console.log(typeof(data));
         var config = {
         method: 'post',
@@ -23,6 +30,7 @@ import Tweet from './Tweet'
         axios(config)
         .then(function (response) {
         //for(let x in response.data) {
+        console.log(response.data)
         let username = response.data["user"]["name"];
         let screen_name = response.data["user"]["screen_name"];
         let profile_image = response.data["user"]["profile_image_url_https"]
@@ -58,33 +66,43 @@ import Tweet from './Tweet'
             favorite_count: favorite_count,
             id: tweet_id 
             });
+        tweetList.push(tweet);
+        tweetsList.current = tweetList;
         console.log(`${tweet}`);
+        setAlreadyDid(true);
+
         })
         .catch(function (error) {
             console.log(error);
-        });
+        })
+
+        }   
+        
+    };
     //setTweetsList(tweetList);
     //})
-    
-    }
 
     useEffect(()=>{
         getIndividualTweet();
-    },[])
-    return (
-        <div>
-            <div className="single-main-container">
-            <Tweet user={tweet.user} 
-                    screen_name={tweet.screen_name} profile_image={tweet.profile_image} 
-                    tweet_content={tweet.tweet_content} in_reply_to={tweet.in_reply_to} 
-                    retweeted_user={tweet.retweeted_user} retweeted_screen_name={tweet.retweeted_screen_name} 
-                    retweeted_profile_image={tweet.retweeted_profile_image} 
-                    retweeted_text={tweet.retweeted_text} is_quote_status={tweet.is_quote_status} 
-                    retweet_count={tweet.retweet_count} favorite_count={tweet.favorite_count} 
-                    id={tweet.id} key={tweet.id} />)
-            </div>
+    },[alreadyDid])
+
+
+    
+    return ( <div>
+        <div className="single-main-container" >
+        <Feed tweetsList={tweetsList.current} styles="feed"/>
         </div>
-    )
+    </div>);
+    
 };
+
+/*<Tweet tweet={tweet} user={tweet.user} 
+screen_name={tweet.screen_name} profile_image={tweet.profile_image} 
+tweet_content={tweet.tweet_content} in_reply_to={tweet.in_reply_to} 
+retweeted_user={tweet.retweeted_user} retweeted_screen_name={tweet.retweeted_screen_name} 
+retweeted_profile_image={tweet.retweeted_profile_image} 
+retweeted_text={tweet.retweeted_text} is_quote_status={tweet.is_quote_status} 
+retweet_count={tweet.retweet_count} favorite_count={tweet.favorite_count} 
+id={tweet.id} key={tweet.id} />*/
 
 export default IndividualTweetMain;

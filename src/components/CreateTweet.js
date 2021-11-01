@@ -6,14 +6,23 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         setTweetInput(e.target.value);
     };
 
-    const submitTweetHandler = (e) => {
-        e.preventDefault();
-        //Send Tweet to DB/Twitter
-        setTweetsList([
-            ...tweetsList,
-            { user: "Nathan Grove", tweet_content: tweetInput, in_reply_to: null, retweeted: undefined, id: Math.random() * 1000 },
-        ]);
-        setTweetInput("");
+    const submitTweetHandler = () => {
+        const axios = require('axios');
+
+        const config = {
+        method: 'post',
+        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/PostTweet',
+        headers: { 'Content-Type': 'text/plain'},
+        data: tweetInput
+        };
+
+        axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     };
 
     const renderThis = () => {

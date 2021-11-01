@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import "./App.css"
 import Login from "./Login"
 import Profile from "./Profile"
@@ -19,7 +19,7 @@ const App = () => {
                     <Route exact path="/pin" component={Pin}/>
                     <Route exact path="/tweet/:tweetID" component={IndividualTweet}/>
                     <Route exact path="/search" component={SearchResults}/>
-                    <Route exact path="/search/:searchTerm" component={SearchResults}/>
+                    <Route path="/search/:searchTerm" component={SearchResults}/>
                 </Switch>
             </Router>
         </div>

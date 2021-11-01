@@ -8,8 +8,13 @@ import {useParams } from 'react-router-dom';
 
 
 const IndividualTweet = () => {
-    const { tweetID } = useParams();
-    const [ID, setID] = useState(`${tweetID}`);
+    let { tweetID } = useParams();
+    let [ID, setID] = useState(`${tweetID}`);
+
+    //useEffect(()=>{
+    //    setID(`${useParams()}`);
+    //},[])
+
     return (
         <div className="main-container">
             <Search/>
