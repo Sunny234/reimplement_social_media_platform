@@ -23,7 +23,11 @@ const PIN = () => {
             axios(config)
             .then(function (response) {
             console.log(JSON.stringify(response.data));
+            window.sessionStorage.setItem('access_token', response.data["access_token"]);
+            window.sessionStorage.setItem('access_secret', response.data["access_token_secret"]);
+            window.location.href="/home";
             })
+            
             .catch(function (error) {
             alert(error);
             });

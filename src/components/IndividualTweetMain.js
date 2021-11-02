@@ -17,7 +17,7 @@ import Feed from './Feed'
         {  
         var axios = require('axios');
         console.log("here");
-        let data = {"id": tweetID, "token": "1454729415011700738-ib7ql4SU5vag2PBOtoMAeFPc2dyxXF", "secret": "osxGjJfDEvQEc0oiWlefuyFM7IQbkj8FhrsXOMHpCvuJ1"};
+        let data = {"id": tweetID, "token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret")};
         console.log(typeof(data));
         var config = {
         method: 'post',
