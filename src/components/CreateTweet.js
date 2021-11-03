@@ -18,18 +18,20 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
     const submitTweetHandler = (e) => {
         e.preventDefault();
         const axios = require('axios');
-        const data =  {"access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret")};
+        const data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret")};
 
         const config = {
         method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/PostTweet',
         headers: { 'Content-Type': 'text/plain'},
-        data: data, tweetInput,
+        data: data,
         };
 
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
+            setTweetInput("");
+            setWordCount("0");
         })
         .catch(function (error) {
             console.log(error);

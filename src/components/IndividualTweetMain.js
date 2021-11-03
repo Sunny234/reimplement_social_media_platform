@@ -1,5 +1,4 @@
 import React, { useEffect, useState , useRef} from 'react'
-import Tweet from './Tweet'
 import Feed from './Feed'
 
  const IndividualTweetMain = ({tweetID}) => {
@@ -13,7 +12,7 @@ import Feed from './Feed'
     //Use ReadTweet to get the contents of that Tweet
     //Display Tweet
     const getIndividualTweet = () => {
-        if (alreadyDid == false)
+        if (alreadyDid === false)
         {  
         var axios = require('axios');
         console.log("here");

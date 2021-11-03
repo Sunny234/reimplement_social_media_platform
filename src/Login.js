@@ -3,6 +3,8 @@ import LoginButton from './components/LoginButton'
 
 const Login = () => {
 
+    window.sessionStorage.clear();
+
     return (
         <div className="login-container">
             <span>
