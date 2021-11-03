@@ -20,7 +20,7 @@ const Search = ({searchInput, setSearchInput}) => {
     //<button onClick={submitSearchHandler} type="submit" className="create-search-button">Search</button>
     return (
         <div className="search">
-            <input onChange={handleSearchInput} className="search-box" placeholder="Search..." type="text" value={searchInput}></input>
+            <input onChange={handleSearchInput} className="search-box" placeholder="Search..." type="text"></input>
             <Link to = {searchInputHandler}><SearchButton searchInput = {searchInput} setSearchInput = {setSearchInput}/></Link>
         </div>
         //<form className="search">

@@ -32,52 +32,53 @@ import Feed from './Feed'
         //for(let x in response.data) {
         console.log(response.data)
         let username = response.data["user"]["name"];
-        let screen_name = response.data["user"]["screen_name"];
-        let profile_image = response.data["user"]["profile_image_url_https"]
-        let tweet_id = response.data["id"];
-        let text = response.data["full_text"];
-        let retweet_count = response.data["retweet_count"];
-        let favorite_count = response.data["favorite_count"];
-        let retweeted_user = null;
-        let retweeted_text = null;
-        let retweeted_screen_name = null;
-        let retweeted_profile_image = null;
-        if(response.data["retweeted_status"] !== undefined) {
-            retweeted_user = response.data["retweeted_status"]["user"]["name"];
-            retweeted_screen_name =response.data["retweeted_status"]["user"]["screen_name"];
-            retweeted_profile_image = response.data["retweeted_status"]["user"]["profile_image_url_https"];
-            retweeted_text = response.data["retweeted_status"]["text"]; 
-        }
-        let in_reply_to_user = response.data["in_reply_to_user_id"];
-        let is_quote_status = response.data["is_quote_status"];
-        //if(tweetListContains(tweetList, tweet_id) === false) {
+            let screen_name = response.data["user"]["screen_name"];
+            let profile_image = response.data["user"]["profile_image_url_https"]
+            let tweet_id = response.data["id_str"];
+            let text = response.data["full_text"];
+            let tweet_image = null;
+            if(response.data["entities"]["media"] !== undefined) {
+            tweet_image = response.data["entities"]["media"][0]["media_url_https"];
+            }
+            let retweet_count = response.data["retweet_count"];
+            let favorite_count = response.data["favorite_count"];
+            let retweeted_user = null;
+            let retweeted_text = null;
+            let retweeted_screen_name = null;
+            let retweeted_profile_image = null;
+            if(response.data["retweeted_status"] !== undefined) {
+                retweeted_user = response.data["retweeted_status"]["user"]["name"];
+                retweeted_screen_name =response.data["retweeted_status"]["user"]["screen_name"];
+                retweeted_profile_image = response.data["retweeted_status"]["user"]["profile_image_url_https"];
+                retweeted_text = response.data["retweeted_status"]["full_text"]; 
+            }
+            let in_reply_to_user = response.data["in_reply_to_screen_name"];
+            let is_quote_status = response.data["is_quote_status"];
         tweet=({
-            user: username, 
-            screen_name: screen_name,
-            profile_image: profile_image,
-            tweet_content: text, 
-            in_reply_to: in_reply_to_user, 
-            retweeted_user: retweeted_user,
-            retweeted_screen_name: retweeted_screen_name,
-            retweeted_profile_image: retweeted_profile_image,
-            retweeted_text: retweeted_text,
-            is_quote_status: is_quote_status,
-            retweet_count: retweet_count,
-            favorite_count: favorite_count,
-            id: tweet_id 
+            "user": username, 
+            "screen_name": screen_name,
+            "profile_image": profile_image,
+            "tweet_content": text, 
+            "tweet_image": tweet_image,
+            "in_reply_to": in_reply_to_user, 
+            "retweeted_user": retweeted_user,
+            "retweeted_screen_name": retweeted_screen_name,
+            "retweeted_profile_image": retweeted_profile_image,
+            "retweeted_text": retweeted_text,
+            "is_quote_status": is_quote_status,
+            "retweet_count": retweet_count,
+            "favorite_count": favorite_count,
+            "id": tweet_id 
             });
         tweetList.push(tweet);
         tweetsList.current = tweetList;
         console.log(`${tweet}`);
         setAlreadyDid(true);
-
         })
         .catch(function (error) {
             console.log(error);
         })
-
         }   
-        
     };
     //setTweetsList(tweetList);
     //})
@@ -85,14 +86,12 @@ import Feed from './Feed'
     useEffect(()=>{
         getIndividualTweet();
     },[alreadyDid])
-
-
     
-    return ( <div>
-        <div className="single-main-container" >
-        <Feed tweetsList={tweetsList.current} styles="feed"/>
+    return ( 
+        <div>
+            <Feed tweetsList={tweetsList.current} styles="individual-tweet-main"/>
         </div>
-    </div>);
+    );
     
 };
 

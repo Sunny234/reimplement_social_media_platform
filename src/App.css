@@ -13,6 +13,7 @@
     display: flex;
 }
 
+/************************* Search *************************/
 .feed_search {
     background-color: rgb(60, 60, 60);
     width: 80vw;
@@ -53,6 +54,7 @@
     background-color: rgb(0, 190, 190);
     border: none;
     padding: 0.5em 2em;
+    margin-left: 1vw;
     position: flex;
     text-align: center;
     border-radius: 200px;
@@ -62,7 +64,9 @@
 .search-button:hover {
     background-color: rgb(0, 255, 255);
 }
+/************************************************************/
 
+/************************* Sidebar **************************/
 .sidebar {
     background-color: rgb(50, 50, 50);
     display: flex;
@@ -100,6 +104,12 @@
     background-color: rgb(201, 0, 0);
 }
 
+.sidebar-button-selected { 
+    background-color: rgb(45,45,45);
+}
+/************************************************************/
+
+/*************************** Feed ***************************/
 .feed {
     background-color: rgb(60, 60, 60);
     height: 66vh;
@@ -109,37 +119,35 @@
     margin-bottom: 25vh;
 }
 
-.single-main-container {
-    background-color: rgb(60, 60, 60);
-    height: 76vh;
-    width: 80vw;
-    overflow-y: auto;
-    margin-top: 7vh;
-    margin-bottom: 0vh;
-}
-
 .feed .tweet-container {
     margin-left: 5%;
     margin-right: 5%;
     padding: 2%;
 }
 
-.feed .tweet-container img {
+.feed .tweet-container .tweet-profile-image {
     float: left;
     height: 6vh;
     border-radius: 250px;
     margin-right: 1%;
 }
 
-.feed .tweet {
+.feed .tweet-container .tweeted_image {
+    display: block;
+    height: 10vh;
+    margin: 2vh auto;
+}
+
+.feed .tweet, .individual-tweet-main .tweet{
     text-decoration: none;
 }
 
 .feed .tweet-hover {
     border-bottom: 1px rgba(30, 30, 30, 0.5) solid;
+    min-height: 13vh;
 }
 
-.feed .tweet-hover:hover {
+.feed .tweet-hover:hover, .individual-tweet-main .tweet-hover:hover {
     background-color: rgb(80,80,80);
 }
 
@@ -158,7 +166,59 @@
     display: inline;
     word-wrap: break-word;
 }
+/************************************************************/
 
+/********************* Individual Tweet *********************/
+.individual-tweet-main {
+    background-color: rgb(60, 60, 60);
+    height: 76vh;
+    width: 80vw;
+    overflow-y: auto;
+    margin-top: 7vh;
+    margin-bottom: 15vh;
+}
+
+.individual-tweet-main .tweet-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 4%;
+}
+
+.individual-tweet-main .tweet-container .tweet-profile-image {
+    float: left;
+    height: 10vh;
+    border-radius: 250px;
+    margin-right: 1%;
+}
+
+.individual-tweet-main .tweet-container img {
+    display: block;
+    height: 15vh;
+}
+
+.individual-tweet-main h2 {
+    font-size: small;
+    margin-bottom: 1%;
+    font-weight: 500;
+}
+
+.individual-tweet-main h1 i {
+    font-size:medium;
+    font-weight: 400;
+}
+
+.individual-tweet-main p {
+    display: inline;
+    word-wrap: break-word;
+}
+
+.individual-tweet-main .tweet-hover {
+    border-bottom: 1px rgba(30, 30, 30, 0.5) solid;
+    min-height: 23vh;
+}
+/************************************************************/
+
+/*********************** Create Tweet ***********************/
 .create-tweet {
     background-color: rgb(55, 55, 55);
     position: fixed;
@@ -169,19 +229,35 @@
     padding: 1vh;
 }
 
-.create-tweet .create-tweet-button {
+.create-tweet-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1vh;
+    margin-right: 4vw;
+}
+
+.create-tweet h1 {
+    height: 1em;
+    width: 4em;
+    display: inline;
+    margin-left: 68vw;
+    margin-right: 1vw;
+    font-weight: 400;
+    text-align: center;
+}
+
+.create-tweet-button {
     background-color: rgb(0, 190, 190);
     border: none;
     padding: 0.7em 1.7em;
-    position: fixed;
-    right: 1%;
-    bottom: 2%;
     text-align: center;
     border-radius: 100px;
+    display: inline;
     transition: 300ms ease-in-out;
 }
 
-.create-tweet .create-tweet-button:hover {
+.create-tweet-button:hover {
     background-color: rgb(0, 255, 255);
 }
 
@@ -201,6 +277,18 @@
 .create-tweet .create-tweet-text:hover {
     background-color: rgb(70,70,70);
 }
+/************************************************************/
+
+/*********** Changes to Create Tweet for Replying ***********/
+.reply-tweet h1 {
+    height: 1em;
+    width: 4em;
+    display: inline;
+    margin-left: 68vw;
+    margin-right: 1vw;
+    font-weight: 400;
+    text-align: center;
+}
 
 .reply-tweet {
     background-color: rgb(55, 55, 55);
@@ -210,22 +298,6 @@
     right: 0;
     height: 15vh;
     padding: 1vh;
-}
-
-.reply-tweet .create-tweet-button {
-    background-color: rgb(0, 190, 190);
-    border: none;
-    padding: 0.7em 1.7em;
-    position: fixed;
-    right: 1%;
-    bottom: 2%;
-    text-align: center;
-    border-radius: 100px;
-    transition: 300ms ease-in-out;
-}
-
-.reply-tweet .create-tweet-button:hover {
-    background-color: rgb(0, 255, 255);
 }
 
 .reply-tweet .create-tweet-text {
@@ -244,7 +316,9 @@
 .reply-tweet .create-tweet-text:hover {
     background-color: rgb(70,70,70);
 }
+/************************************************************/
 
+/************************** Login ***************************/
 .login-container {
     display: flex;
     align-items: center;
@@ -270,7 +344,9 @@
 .login-logo {
     height: 30vh;
 }
+/************************************************************/
 
+/************************* Pin Page *************************/
 .pin-container {
     background-color: rgb(60, 60, 60);
     height: 100vh;
@@ -301,7 +377,9 @@
     color: white;
     text-align: center;
 }
+/************************************************************/
 
+/************************* Profile *************************/
 .profile {
     background-color: rgb(60, 60, 60);
     width: 80vw;
@@ -324,8 +402,10 @@
     display: inline;
     font-size: 2em;
 }
+/************************************************************/
 
-/* width */
+/************************ Scrolling *************************/
+/* Width */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -339,3 +419,4 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(40,40,40);
 }
+/************************************************************/

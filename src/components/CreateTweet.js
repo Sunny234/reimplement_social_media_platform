@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, styles }) => {
 
+    const [wordCount, setWordCount] = useState("0");
+    const textRef = useRef();
+
+    const getWords = () => {
+        let arr = String(textRef.current.value).split(" ");
+        return arr.length - 1;
+    };
+
     const tweetInputHandler = (e) => {
         setTweetInput(e.target.value);
+        setWordCount(getWords());
     };
 
     const submitTweetHandler = () => {
@@ -29,15 +38,21 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         if(styles === "reply") {
             return (
                 <form className="reply-tweet">
-                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Placerholder Tweet Reply..." type="text" value={tweetInput}></textarea>
+                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Say your side..." type="text" value={tweetInput}></textarea>
+                    <span className="create-tweet-footer">
+                    <h1>{wordCount}</h1>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
+                    </span>
                 </form>
             )
         } else {
             return (
                 <form className="create-tweet">
-                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Tell your story..." type="text" value={tweetInput}></textarea>
+                    <textarea ref={textRef} onChange={tweetInputHandler} className="create-tweet-text" placeholder="Tell your story..." type="text" value={tweetInput}></textarea>
+                    <span className="create-tweet-footer">
+                    <h1>{wordCount}</h1>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
+                    </span>
                 </form>
             )
         }

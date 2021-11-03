@@ -39,6 +39,10 @@ const MainHome = () => {
             let profile_image = response.data[x]["user"]["profile_image_url_https"]
             let tweet_id = response.data[x]["id_str"];
             let text = response.data[x]["full_text"];
+            let tweet_image = null;
+            if(response.data[x]["entities"]["media"] !== undefined) {
+            tweet_image = response.data[x]["entities"]["media"][0]["media_url_https"];
+            }
             let retweet_count = response.data[x]["retweet_count"];
             let favorite_count = response.data[x]["favorite_count"];
             let retweeted_user = null;
@@ -51,7 +55,7 @@ const MainHome = () => {
                 retweeted_profile_image = response.data[x]["retweeted_status"]["user"]["profile_image_url_https"];
                 retweeted_text = response.data[x]["retweeted_status"]["full_text"]; 
             }
-            let in_reply_to_user = response.data[x]["in_reply_to_user_id"];
+            let in_reply_to_user = response.data[x]["in_reply_to_screen_name"];
             let is_quote_status = response.data[x]["is_quote_status"];
             if(tweetListContains(tweetList, tweet_id) === false) {
                 tweetList.push({
@@ -59,6 +63,7 @@ const MainHome = () => {
                     "screen_name": screen_name,
                     "profile_image": profile_image,
                     "tweet_content": text, 
+                    "tweet_image": tweet_image,
                     "in_reply_to": in_reply_to_user, 
                     "retweeted_user": retweeted_user,
                     "retweeted_screen_name": retweeted_screen_name,
