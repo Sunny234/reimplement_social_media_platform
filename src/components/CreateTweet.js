@@ -15,14 +15,16 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         setWordCount(getWords());
     };
 
-    const submitTweetHandler = () => {
+    const submitTweetHandler = (e) => {
+        e.preventDefault();
         const axios = require('axios');
+        const data =  {"access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret")};
 
         const config = {
         method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/PostTweet',
         headers: { 'Content-Type': 'text/plain'},
-        data: tweetInput
+        data: data, tweetInput,
         };
 
         axios(config)
