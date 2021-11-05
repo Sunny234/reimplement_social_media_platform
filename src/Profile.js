@@ -9,7 +9,7 @@ const Profile = () => {
         <div className="main-container">
             <Search/>
             <Sidebar/>
-            <ProfileMain />
+            <ProfileMain/>
         </div>
     )
 };

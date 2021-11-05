@@ -3,6 +3,7 @@ import LoginButton from './components/LoginButton'
 
 const Login = () => {
 
+    //Clears the sessionStorage in case User just signed out
     window.sessionStorage.clear();
 
     return (
@@ -12,7 +13,7 @@ const Login = () => {
             </span>
             <LoginButton/>
         </div>
-    )
+    );
 };
 
 export default Login;

@@ -3,10 +3,12 @@ import {Link} from 'react-router-dom';
 
 const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  in_reply_to, retweeted_user, retweeted_screen_name, retweeted_profile_image, retweeted_text, is_quote_status, retweet_count, favorite_count, id }) => {
 
+    //Sends User to the Individual Tweet page
     const viewSingleTweetHandler = (e) => {
         return `/tweet/${id}`;
     };
     
+    //Checks whether Tweet has an image
     const hasImage = () => {
         if(tweet_image !== null) {
             return (
@@ -15,8 +17,9 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
         } else {
             return;
         }
-    }
+    };
 
+    //Checks whether Tweet is a reply to another Tweet
     const isReply = () => {
         if(in_reply_to !== null) {
             return (
@@ -25,6 +28,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
         }
     };
 
+    //Checks if Tweet was a Retweet of another Tweet and renders the correct information
     const isRetweet = () => {
         if(retweeted_user !== null) {
             return (
@@ -48,7 +52,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                 </div>
             );
         }
-    }
+    };
 
     return (
         <Link to={viewSingleTweetHandler} className="link">
@@ -58,7 +62,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                 </div>
             </div>
         </Link>
-    )
+    );
 };
 
 export default Tweet;

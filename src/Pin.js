@@ -2,10 +2,12 @@ import React from 'react';
 
 const PIN = () => {
 
+    //Handles pin input
     const submitPinHandler = (e) => {
         e.preventDefault();
         console.log(typeof(e.target.value));
         console.log((typeof(window.sessionStorage.getItem("id"))));
+        //Once the input reaches length of 7 try to fetch the tokens
         if(e.target.value.length === 7) {
             const axios = require('axios');
             const data = { "ID": window.sessionStorage.getItem("id"), "PIN": e.target.value};
@@ -23,11 +25,12 @@ const PIN = () => {
             axios(config)
             .then(function (response) {
             console.log(JSON.stringify(response.data));
+            //Stores the token on the frontend
             window.sessionStorage.setItem('access_token', response.data["access_token"]);
             window.sessionStorage.setItem('access_secret', response.data["access_token_secret"]);
+            //Redirects to home
             window.location.href="/home";
             })
-            
             .catch(function (error) {
             alert(error);
             });

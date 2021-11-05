@@ -1,20 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 
-const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, styles }) => {
+const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
 
+    //State/Ref used for word count
     const [wordCount, setWordCount] = useState("0");
     const textRef = useRef();
 
+    //Function gets what is in the <textarea> and makes an array of all the words that are seperated by spaces
     const getWords = () => {
         let arr = String(textRef.current.value).split(" ");
         return arr.length - 1;
     };
 
+    //Updates State when User types
     const tweetInputHandler = (e) => {
         setTweetInput(e.target.value);
         setWordCount(getWords());
     };
 
+    //When user submits a Tweet to be posted, makes the request to backend
     const submitTweetHandler = (e) => {
         e.preventDefault();
         const axios = require('axios');
@@ -30,6 +34,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
+            //Resets the textarea and word count
             setTweetInput("");
             setWordCount("0");
         })
@@ -38,6 +43,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
         });
     };
 
+    //Used to know which style to apply to the textarea, whether it's on the viewing individual tweet page or the main timeline
     const renderThis = () => {
         if(styles === "reply") {
             return (
@@ -48,7 +54,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
                     </span>
                 </form>
-            )
+            );
         } else {
             return (
                 <form className="create-tweet">
@@ -58,9 +64,9 @@ const CreateTweet = ({ tweetInput, setTweetInput, tweetsList, setTweetsList, sty
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
                     </span>
                 </form>
-            )
+            );
         }
-    }
+    };
 
     return renderThis();
 };

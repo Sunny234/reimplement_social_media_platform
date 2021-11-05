@@ -1,6 +1,6 @@
-import React from 'react'
-import SidebarButton from './SidebarButton'
-import SignOutButton from './SignOutButton'
+import React from 'react';
+import SidebarButton from './SidebarButton';
+import SignOutButton from './SignOutButton';
 
 const Sidebar = () => {
     return (
@@ -12,7 +12,7 @@ const Sidebar = () => {
                 <li><SignOutButton text="Sign out" URL="/"/></li>
             </ul>
         </div>
-    )
+    );
 };
 
 export default Sidebar;
