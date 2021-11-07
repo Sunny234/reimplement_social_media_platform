@@ -45,7 +45,7 @@ const SearchResults = () => {
     //Get Tweets from Timeline into State
     const getResults = () => {
         var axios = require('axios');
-        let data = {"searchQuery":searchInput, "token": "1454729415011700738-ib7ql4SU5vag2PBOtoMAeFPc2dyxXF", "secret":"osxGjJfDEvQEc0oiWlefuyFM7IQbkj8FhrsXOMHpCvuJ1"}
+        let data = {"searchQuery":searchInput, "token": window.sessionStorage.getItem("access_token"), "secret":window.sessionStorage.getItem("access_secret")}
         var config = {
         method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/SearchTweets',
