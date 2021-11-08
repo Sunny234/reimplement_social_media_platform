@@ -11,14 +11,16 @@ def Retweet(tweetID):
     auth.set_access_token(e, f)
     api = tweepy.API(auth, wait_on_rate_limit = True)
     api.retweet(tweetID)
+    return "tweet " + str(tweetID) + " should have +1 retweets"
 
 def lambda_handler(event, context):
     return {
+        'statusCode': 200,
         'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-            },
-        'statusCode': Retweet(event['body']),
-        'body': json.dumps('Hello from Lambda!')
+            "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Origin" : "*",
+            "Access-Control-Allow-Methods" : "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT"
+        },
+        'body': Retweet(event['body']),
+        'isBase64Encoded': False
     }
