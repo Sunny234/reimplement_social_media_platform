@@ -66,8 +66,10 @@ const SearchResults = () => {
             let text = resp_object[x]["full_text"];
             let tweet_image = null;
             if(resp_object[x]["entities"]["media"] !== undefined) {
-            tweet_image = resp_object[x]["entities"]["media"][0]["media_url_https"];
+                tweet_image = resp_object[x]["entities"]["media"][0]["media_url_https"];
             }
+            let retweeted = resp_object[x]["retweeted"];
+            let favorited = resp_object[x]["favorited"];
             let retweet_count = resp_object[x]["retweet_count"];
             let favorite_count = resp_object[x]["favorite_count"];
             let retweeted_user = null;
@@ -95,6 +97,8 @@ const SearchResults = () => {
                     "retweeted_profile_image": retweeted_profile_image,
                     "retweeted_text": retweeted_text,
                     "is_quote_status": is_quote_status,
+                    "favorited": favorited,
+                    "retweeted": retweeted,
                     "retweet_count": retweet_count,
                     "favorite_count": favorite_count,
                     "id": tweet_id 

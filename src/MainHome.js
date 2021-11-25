@@ -8,7 +8,24 @@ const MainHome = () => {
 
     let tweetList = [];
     const [tweetInput, setTweetInput] = useState("");
-    const [tweetsList, setTweetsList] = useState([]);
+    const [tweetsList, setTweetsList] = useState([{
+        "user": "Nathan Grove", 
+        "screen_name": "screen_name",
+        "profile_image": "profile_image",
+        "tweet_content": "text", 
+        "tweet_image": null,
+        "in_reply_to": null, 
+        "retweeted_user": null,
+        "retweeted_screen_name": null,
+        "retweeted_profile_image": null,
+        "retweeted_text": null,
+        "is_quote_status": false,
+        "favorited": false,
+        "retweeted": false,
+        "retweet_count": 2342,
+        "favorite_count": 12341,
+        "id": 123412341234
+    }, ]);
     const [searchInput, setSearchInput] = useState("");
 
     const tweetListContains = (list, id) => {
@@ -43,6 +60,8 @@ const MainHome = () => {
             if(response.data[x]["entities"]["media"] !== undefined) {
             tweet_image = response.data[x]["entities"]["media"][0]["media_url_https"];
             }
+            let retweeted = response.data[x]["retweeted"];
+            let favorited = response.data[x]["favorited"];
             let retweet_count = response.data[x]["retweet_count"];
             let favorite_count = response.data[x]["favorite_count"];
             let retweeted_user = null;
@@ -70,6 +89,8 @@ const MainHome = () => {
                     "retweeted_profile_image": retweeted_profile_image,
                     "retweeted_text": retweeted_text,
                     "is_quote_status": is_quote_status,
+                    "favorited": favorited,
+                    "retweeted": retweeted,
                     "retweet_count": retweet_count,
                     "favorite_count": favorite_count,
                     "id": tweet_id 

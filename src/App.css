@@ -1,3 +1,22 @@
+:root {
+    --main-bg-color: rgb(60, 60, 60);
+    --search-bar-color: rgb(40, 40, 40);
+    --search-box-color: rgb(50, 50, 50);
+    --main-button-color: rgb(0, 190, 190);
+    --main-button-hover-color: rgb(0, 255, 255);
+    --tweet-hover-border-color: rgba(30, 30, 30, 0.5);
+    --tweet-hover-color: rgb(80,80,80);
+    --create-tweet-color: rgb(55, 55, 55);
+    --create-tweet-hover-color: rgb(70,70,70);
+    --sidebar-list-hover-color: rgba(255, 255, 255, 0.2);
+    --sidebar-list-selected-color: rgb(45,45,45);
+    --sign-out-button-color: rgb(150, 0, 0);
+    --sign-out-button-hover-color: rgb(201, 0, 0);
+    --scroll-handle-color: rgb(160, 160, 160);
+    --scroll-handle-hover-color: rgb(100, 100, 100);
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +34,7 @@
 
 /************************* Search *************************/
 .feed-search {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     height: 93vh;
     width: 80vw;
     overflow-y: auto;
@@ -31,7 +50,7 @@
 }
 
 .search {
-    background-color: rgb(40, 40, 40);
+    background-color: var(--search-bar-color);
     position: fixed;
     display: flex;
     justify-content: center;
@@ -41,7 +60,7 @@
 }
 
 .search .search-box {
-    background-color: rgb(50, 50, 50);
+    background-color: var(--search-box-color);
     font-family: sans-serif;
     height: 2em;
     width: 50vw;
@@ -52,7 +71,7 @@
 }
 
 .search-button {
-    background-color: rgb(0, 190, 190);
+    background-color: var(--main-button-color);
     border: none;
     padding: 0.5em 2em;
     margin-left: 1vw;
@@ -63,7 +82,7 @@
 }
 
 .search-button:hover {
-    background-color: rgb(0, 255, 255);
+    background-color: var(--main-button-hover-color);
 }
 
 .feed-search .tweet-container {
@@ -90,12 +109,12 @@
 }
 
 .feed-search .tweet-hover {
-    border-bottom: 1px rgba(30, 30, 30, 0.5) solid;
+    border-bottom: 1px var(--tweet-hover-border-color) solid;
     min-height: 13vh;
 }
 
 .feed-search .tweet-hover:hover {
-    background-color: rgb(80,80,80);
+    background-color: var(--tweet-hover-color);
 }
 
 .feed-search h2 {
@@ -118,7 +137,7 @@
 
 /************************* Sidebar **************************/
 .sidebar {
-    background-color: rgb(50, 50, 50);
+    background-color: var(--search-box-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,26 +161,26 @@
 }
 
 .sidebar ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--sidebar-list-hover-color);
 }
 
 .sidebar ul li .sign-out-button {
-    background-color: rgb(150, 0, 0);
+    background-color: var(--sign-out-button-color);
     transition: 300ms ease-in-out;
 }
 
 .sidebar ul li .sign-out-button:hover {
-    background-color: rgb(201, 0, 0);
+    background-color: var(--sign-out-button-hover-color);
 }
 
 .sidebar-button-selected { 
-    background-color: rgb(45,45,45);
+    background-color: var(--sidebar-list-selected-color);
 }
 /************************************************************/
 
 /*************************** Feed ***************************/
 .feed {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     height: 66vh;
     width: 80vw;
     overflow-y: auto;
@@ -193,12 +212,32 @@
 }
 
 .feed .tweet-hover {
-    border-bottom: 1px rgba(30, 30, 30, 0.5) solid;
+    border-bottom: 1px var(--tweet-hover-border-color) solid;
     min-height: 13vh;
 }
 
 .feed .tweet-hover:hover, .individual-tweet-main .tweet-hover:hover {
-    background-color: rgb(80,80,80);
+    background-color: var(--tweet-hover-color);
+}
+
+.feed .tweet-actions {
+    margin-left: 25%;
+    margin-bottom: 1%;
+}
+
+.feed .tweet-actions h3 {
+    display: inline;
+    font-weight: 400;
+}
+
+.feed .tweet-actions .tweet-action-button {
+    border: none;
+    margin-left: 5%;
+}
+
+.feed .tweet-actions .tweet-action-button button {
+    background-color: transparent;
+    border: none;
 }
 
 .feed h2 {
@@ -220,7 +259,7 @@
 
 /********************* Individual Tweet *********************/
 .individual-tweet-main {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     height: 76vh;
     width: 80vw;
     overflow-y: auto;
@@ -263,14 +302,14 @@
 }
 
 .individual-tweet-main .tweet-hover {
-    border-bottom: 1px rgba(30, 30, 30, 0.5) solid;
+    border-bottom: 1px var(--tweet-hover-border-color) solid;
     min-height: 23vh;
 }
 /************************************************************/
 
 /*********************** Create Tweet ***********************/
 .create-tweet {
-    background-color: rgb(55, 55, 55);
+    background-color: var(--create-tweet-color);
     position: fixed;
     bottom: 0;
     left: 20vw;
@@ -289,16 +328,16 @@
 
 .create-tweet h1 {
     height: 1em;
-    width: 4em;
+    width: 8em;
     display: inline;
-    margin-left: 68vw;
+    margin-left: 64vw;
     margin-right: 1vw;
     font-weight: 400;
     text-align: center;
 }
 
 .create-tweet-button {
-    background-color: rgb(0, 190, 190);
+    background-color: var(--main-button-color);
     border: none;
     padding: 0.7em 1.7em;
     text-align: center;
@@ -308,11 +347,11 @@
 }
 
 .create-tweet-button:hover {
-    background-color: rgb(0, 255, 255);
+    background-color: var(--main-button-hover-color);
 }
 
 .create-tweet .create-tweet-text {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     border: none;
     height: 15vh;
     width: 98%;
@@ -325,7 +364,7 @@
 }
 
 .create-tweet .create-tweet-text:hover {
-    background-color: rgb(70,70,70);
+    background-color: var(--create-tweet-hover-color);
 }
 /************************************************************/
 
@@ -341,7 +380,7 @@
 }
 
 .reply-tweet {
-    background-color: rgb(55, 55, 55);
+    background-color: var(--create-tweet-color);
     position: fixed;
     bottom: 0;
     left: 20vw;
@@ -351,7 +390,7 @@
 }
 
 .reply-tweet .create-tweet-text {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     border: none;
     height: 5vh;
     width: 98%;
@@ -364,7 +403,7 @@
 }
 
 .reply-tweet .create-tweet-text:hover {
-    background-color: rgb(70,70,70);
+    background-color: var(--create-tweet-hover-color);
 }
 /************************************************************/
 
@@ -374,7 +413,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     height: 100vh;
     font-size: 5rem;
 }
@@ -387,7 +426,7 @@
 }
 .login-button {
     margin-top: 5vh;
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     border: none;
 }
 
@@ -398,7 +437,7 @@
 
 /************************* Pin Page *************************/
 .pin-container {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     height: 100vh;
     width: 100vw;
 }
@@ -411,7 +450,7 @@
 }
 
 .pin-box {
-    background-color: rgb(80,80,80);
+    background-color: var(--tweet-hover-color);
     width: 7em;
     height: 1em;
     font-size: 128px;
@@ -431,7 +470,7 @@
 
 /************************* Profile *************************/
 .profile {
-    background-color: rgb(60, 60, 60);
+    background-color: var(--main-bg-color);
     width: 80vw;
     overflow-y: auto;
     margin-top: 7vh;
@@ -462,12 +501,12 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(160, 160, 160);
+    background: var(--scroll-handle-color);
     border-radius: 2em;
 }
   
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
+    background: var(--scroll-handle-hover-color);
 }
 /************************************************************/

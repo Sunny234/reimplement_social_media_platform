@@ -24,6 +24,8 @@ import Tweet from './Tweet';
                         retweeted_profile_image={tweet.retweeted_profile_image}
                         retweeted_text={tweet.retweeted_text}
                         is_quote_status={tweet.is_quote_status}
+                        favorited = {tweet.favorited}
+                        retweeted = {tweet.retweeted}
                         retweet_count={tweet.retweet_count}
                         favorite_count={tweet.favorite_count}
                         id={tweet.id}
@@ -49,6 +51,8 @@ import Tweet from './Tweet';
                             retweeted_profile_image={tweet.retweeted_profile_image}
                             retweeted_text={tweet.retweeted_text}
                             is_quote_status={tweet.is_quote_status}
+                            favorited = {tweet.favorited}
+                            retweeted = {tweet.retweeted}
                             retweet_count={tweet.retweet_count}
                             favorite_count={tweet.favorite_count}
                             id={tweet.id}

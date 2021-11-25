@@ -4,6 +4,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
 
     //State/Ref used for word count
     const [wordCount, setWordCount] = useState("0");
+    const [characterCount, setCharacterCount] = useState("0");
     const textRef = useRef();
 
     //Function gets what is in the <textarea> and makes an array of all the words that are seperated by spaces
@@ -12,10 +13,15 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
         return arr.length - 1;
     };
 
+    const getCharacterCount = () => {
+        return textRef.current.value.length;
+    }
+
     //Updates State when User types
     const tweetInputHandler = (e) => {
         setTweetInput(e.target.value);
         setWordCount(getWords());
+        setCharacterCount(getCharacterCount());
     };
 
     //When user submits a Tweet to be posted, makes the request to backend
@@ -37,6 +43,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
             //Resets the textarea and word count
             setTweetInput("");
             setWordCount("0");
+            setCharacterCount("0");
         })
         .catch(function (error) {
             console.log(error);
@@ -50,7 +57,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
                 <form className="reply-tweet">
                     <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Say your side..." type="text" value={tweetInput}></textarea>
                     <span className="create-tweet-footer">
-                    <h1>{wordCount}</h1>
+                    <h1>{wordCount} | {characterCount}</h1>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
                     </span>
                 </form>
@@ -60,7 +67,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
                 <form className="create-tweet">
                     <textarea ref={textRef} onChange={tweetInputHandler} className="create-tweet-text" placeholder="Tell your story..." type="text" value={tweetInput}></textarea>
                     <span className="create-tweet-footer">
-                    <h1>{wordCount}</h1>
+                    <h1>{wordCount} | {characterCount}</h1>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>
                     </span>
                 </form>
