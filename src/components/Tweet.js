@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom';
 
 const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  in_reply_to, retweeted_user, retweeted_screen_name, retweeted_profile_image, retweeted_text, is_quote_status, favorited, retweeted, retweet_count, favorite_count, id }) => {
+
+    let tweetList = [];
+    const [rfavorited, setFavorited] = useState([favorited, favorite_count]);
+    const [rretweeted, setRetweeted] = useState([retweeted, retweet_count]);
 
     //Sends User to the Individual Tweet page
     const viewSingleTweetHandler = (e) => {
@@ -29,13 +33,13 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     };
 
     const renderLike = () => {
-        if(favorited === true) {
+        if(rfavorited[0] === true) {
             return (
                 <span className="tweet-action-button">
                     <button onClick={likeHandler}>
                         <i style={{color: "red"}} className="fas fa-heart"></i>
                     </button>
-                    <h3> {favorite_count}</h3>
+                    <h3> {rfavorited[1]}</h3>
                 </span>
                 );
         } else {
@@ -44,20 +48,24 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                     <button onClick={likeHandler}>
                         <i className="far fa-heart"></i>
                     </button>
-                    <h3> {favorite_count}</h3>
+                    <h3> {rfavorited[1]}</h3>
                 </span>
                 );
         }
     }
 
     const renderRetweet = () => {
+<<<<<<< HEAD
         if(retweeted === true) {
+=======
+        if(rretweeted[0] === true)
+>>>>>>> 00835b688277f30a4c9b69c668c91540654b7814
             return (
                 <span className="tweet-action-button">
                     <button onClick={retweetHandler}>
                         <i style={{color: "green"}} className="fas fa-retweet"></i>
                     </button>
-                    <h3> {retweet_count}</h3>
+                    <h3> {rretweeted[1]}</h3>
                 </span>
                 );
         } else {
@@ -66,7 +74,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                     <button onClick={retweetHandler}>
                         <i className="fas fa-retweet"></i>
                     </button>
-                    <h3> {retweet_count}</h3>
+                    <h3> {rretweeted[1]}</h3>
                 </span>
                 );
         }
@@ -101,20 +109,59 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     };
 
     const likeHandler = () => {
+<<<<<<< HEAD
         if(favorited === true) {
             favorited = false;
             favorite_count--;
+=======
+        /**var axios = require('axios');
+        let data = {"access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id")};
+        var config = {
+        method: 'post',
+        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/liketweet',
+        headers: { 
+            'Content-Type': 'text/plain'
+        },
+        data: data
+        }
+        axios(config)
+        .then(function (response) {
+            if (response.data["Action"] == "liked")
+            {
+                favorited = true;
+            }
+            else (response.data["Action"] == "unliked")
+            {
+                favorited = false;
+            }
+        })
+        .catch(function (error) {
+        console.log(error);
+        });*/
+        console.log(rfavorited);
+        if(rfavorited[0] === true) {
+            setFavorited([false, rfavorited[1] - 1]);
+>>>>>>> 00835b688277f30a4c9b69c668c91540654b7814
         } else {
-            favorited = true;
-            favorite_count++;
+            setFavorited([true, rfavorited[1] + 1]);
         }
         console.log(favorited);
         console.log(favorite_count);
     }
 
     const retweetHandler = () => {
-        console.log(retweet_count);
+        console.log(rretweeted);
+        if(rretweeted[0] === true) {
+            setRetweeted([false, rretweeted[1] - 1]);
+        } else {
+            setRetweeted([true, rretweeted[1] + 1]);
+        }
+        console.log(favorited);
     }
+
+    useEffect(()=>{
+        renderLike(); renderRetweet();
+    },[rfavorited, rretweeted])
 
     return (
         <div className="tweet-hover">

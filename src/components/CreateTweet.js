@@ -28,7 +28,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
     const submitTweetHandler = (e) => {
         e.preventDefault();
         const axios = require('axios');
-        const data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "is_reply": "false", "reply_ID": "0"};
+        const data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "is_reply": "False", "reply_ID": "0"};
 
         const config = {
         method: 'post',
