@@ -1,30 +1,25 @@
 import tweepy
-import boto3
 import json
 import os
 
-def GetPIN(input):
-    values = json.loads(input)
-    #values = json.loads(f)
-    #print(input)
-    db_client = boto3.resource('dynamodb')
-    db_table = db_client.Table('tblLogin')
-    tokens = [] 
+def GetProfile(received):
+# Loads the given user ID and converts it from JSON into an integer value "user_ID".
+# If needed can look up screen name rather than ID if front-end would prefer.
+    convert_ID = json.loads(received)
+    user_Cred = int(convert_ID["id"])
+    
+# Access tokens for Twitter access.
     c = os.environ['API_KEY']
     d = os.environ['API_KEY_SECRET']
-    login = tweepy.OAuthHandler(c, d)
-    answer = db_table.get_item(
-        Key = {
-            "ID": int(values["ID"])
-        })
-    reqtoken = answer['Item']['Token']
-    verifier = values["PIN"]
-    login.request_token = { 
-        'oauth_token' : reqtoken,
-        'oauth_token_secret': verifier
-        }
+    e = transformed_received["token"]
+    f = transformed_received["secret"]
+    auth = tweepy.OAuthHandler(c, d)
+    auth.set_access_token(e, f)
+    api = tweepy.API(auth, wait_on_rate_limit=True)
+    
+# Get a dict of different user attributes.
     try:
-        login.get_access_token(values["PIN"])
+        user_Info = api.get_user(user_id = user_Cred)
     except tweepy.errors.BadRequest as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.Unauthorized as error:
@@ -37,17 +32,11 @@ def GetPIN(input):
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.TwitterServerErrror as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    tokens.append(login.access_token)
-    tokens.append(login.access_token_secret)
-    db_table.delete_item(
-        Key = {
-            'ID': int(values["ID"])
-            })
-    actual_tokens = {
-            "access_token": tokens[0],
-            "access_token_secret": tokens[1]
-        }
-    return actual_tokens
+# If user account is protected, return an error message.
+    if user_Info.protected == 1:
+        return ("Error: User account is private. ")
+    
+    return user_Info
     
 def response_generator(code, response):
     return {
@@ -62,13 +51,4 @@ def response_generator(code, response):
         }
 
 def lambda_handler(event, context):
-    return {
-        'statusCode' : 200,
-        'headers' : {
-            "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-            "Access-Control-Allow-Origin" : "*",
-            "Access-Control-Allow-Methods" : "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT"
-            },
-        'body': json.dumps(GetPIN(event['body']), ensure_ascii = False, indent = 4),
-        'isBase64Encoded': False
-        }
+    return GetProfile(event['body'])
