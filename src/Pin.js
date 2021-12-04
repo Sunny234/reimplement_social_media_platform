@@ -28,6 +28,7 @@ const PIN = () => {
             //Stores the token on the frontend
             window.sessionStorage.setItem('access_token', response.data["access_token"]);
             window.sessionStorage.setItem('access_secret', response.data["access_token_secret"]);
+            //window.sessionStorage.setItem('user_id', response.data["user_id"]);
             //Redirects to home
             window.location.href="/home";
             })
