@@ -56,34 +56,34 @@ const SearchResults = () => {
         };
         axios(config)
         .then(function (response) {
-            let resp_object = JSON.parse(response.data["body"]);
-            console.log(resp_object);
-        for(let x in resp_object) {
-            let username = resp_object[x]["user"]["name"];
-            let screen_name = resp_object[x]["user"]["screen_name"];
-            let profile_image = resp_object[x]["user"]["profile_image_url_https"]
-            let tweet_id = resp_object[x]["id_str"];
-            let text = resp_object[x]["full_text"];
+            //let resp_object = JSON.parse(response.data["body"]);
+            //console.log(resp_object);
+        for(let x in response.data) {
+            let username = response.data[x]["user"]["name"];
+            let screen_name = response.data[x]["user"]["screen_name"];
+            let profile_image = response.data[x]["user"]["profile_image_url_https"]
+            let tweet_id = response.data[x]["id_str"];
+            let text = response.data[x]["full_text"];
             let tweet_image = null;
-            if(resp_object[x]["entities"]["media"] !== undefined) {
-                tweet_image = resp_object[x]["entities"]["media"][0]["media_url_https"];
+            if(response.data[x]["entities"]["media"] !== undefined) {
+                tweet_image = response.data[x]["entities"]["media"][0]["media_url_https"];
             }
-            let retweeted = resp_object[x]["retweeted"];
-            let favorited = resp_object[x]["favorited"];
-            let retweet_count = resp_object[x]["retweet_count"];
-            let favorite_count = resp_object[x]["favorite_count"];
+            let retweeted = response.data[x]["retweeted"];
+            let favorited = response.data[x]["favorited"];
+            let retweet_count = response.data[x]["retweet_count"];
+            let favorite_count = response.data[x]["favorite_count"];
             let retweeted_user = null;
             let retweeted_text = null;
             let retweeted_screen_name = null;
             let retweeted_profile_image = null;
-            if(resp_object[x]["retweeted_status"] !== undefined) {
-                retweeted_user = resp_object[x]["retweeted_status"]["user"]["name"];
-                retweeted_screen_name = resp_object[x]["retweeted_status"]["user"]["screen_name"];
-                retweeted_profile_image = resp_object[x]["retweeted_status"]["user"]["profile_image_url_https"];
-                retweeted_text = resp_object[x]["retweeted_status"]["full_text"]; 
+            if(response.data[x]["retweeted_status"] !== undefined) {
+                retweeted_user = response.data[x]["retweeted_status"]["user"]["name"];
+                retweeted_screen_name = response.data[x]["retweeted_status"]["user"]["screen_name"];
+                retweeted_profile_image = response.data[x]["retweeted_status"]["user"]["profile_image_url_https"];
+                retweeted_text = response.data[x]["retweeted_status"]["full_text"]; 
             }
-            let in_reply_to_user = resp_object[x]["in_reply_to_screen_name"];
-            let is_quote_status = resp_object[x]["is_quote_status"];
+            let in_reply_to_user = response.data[x]["in_reply_to_screen_name"];
+            let is_quote_status = response.data[x]["is_quote_status"];
             if(listContains(resultList, tweet_id) === false) {
                 resultList.push({
                     "user": username, 
@@ -115,7 +115,7 @@ const SearchResults = () => {
 
     useEffect(()=>{
         getResults();
-    },[])
+    },[searchInput])
 
     return (
         <div className="search-results-container">

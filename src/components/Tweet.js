@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  in_reply_to, retweeted_user, retweeted_screen_name, retweeted_profile_image, retweeted_text, is_quote_status, favorited, retweeted, retweet_count, favorite_count, id }) => {
 
-    let tweetList = [];
     const [rfavorited, setFavorited] = useState([favorited, favorite_count]);
     const [rretweeted, setRetweeted] = useState([retweeted, retweet_count]);
 
