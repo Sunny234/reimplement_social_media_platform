@@ -33,8 +33,10 @@ import Feed from './Feed';
             let text = response.data["full_text"];
             let tweet_image = null;
             if(response.data["entities"]["media"] !== undefined) {
-            tweet_image = response.data["entities"]["media"][0]["media_url_https"];
+                tweet_image = response.data["entities"]["media"][0]["media_url_https"];
             }
+            let retweeted = response.data["retweeted"];
+            let favorited = response.data["favorited"];
             let retweet_count = response.data["retweet_count"];
             let favorite_count = response.data["favorite_count"];
             let retweeted_user = null;
@@ -42,6 +44,10 @@ import Feed from './Feed';
             let retweeted_screen_name = null;
             let retweeted_profile_image = null;
             if(response.data["retweeted_status"] !== undefined) {
+                retweeted = response.data["retweeted_status"]["retweeted"];
+                favorited = response.data["retweeted_status"]["favorited"];
+                retweet_count = response.data["retweeted_status"]["retweet_count"];
+                favorite_count = response.data["retweeted_status"]["favorite_count"];
                 retweeted_user = response.data["retweeted_status"]["user"]["name"];
                 retweeted_screen_name =response.data["retweeted_status"]["user"]["screen_name"];
                 retweeted_profile_image = response.data["retweeted_status"]["user"]["profile_image_url_https"];
@@ -63,12 +69,15 @@ import Feed from './Feed';
                 "is_quote_status": is_quote_status,
                 "retweet_count": retweet_count,
                 "favorite_count": favorite_count,
+                "favorited": favorited,
+                "retweeted": retweeted,
                 "id": tweet_id 
                 });
             tweetList.push(tweet);
             tweetsList.current = tweetList;
             console.log(`${tweet}`);
             setAlreadyDid(true);
+            console.log(tweetsList);
             })
             .catch(function (error) {
                 console.log(error);
