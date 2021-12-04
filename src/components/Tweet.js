@@ -51,7 +51,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     }
 
     const renderRetweet = () => {
-        if(retweeted === true)
+        if(retweeted === true) {
             return (
                 <span className="tweet-action-button">
                     <button onClick={retweetHandler}>
@@ -60,7 +60,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                     <h3> {retweet_count}</h3>
                 </span>
                 );
-        else
+        } else {
             return (
                 <span className="tweet-action-button">
                     <button onClick={retweetHandler}>
@@ -69,6 +69,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
                     <h3> {retweet_count}</h3>
                 </span>
                 );
+        }
     }
 
     //Checks if Tweet was a Retweet of another Tweet and renders the correct information
@@ -100,7 +101,6 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     };
 
     const likeHandler = () => {
-        console.log(favorite_count);
         if(favorited === true) {
             favorited = false;
             favorite_count--;
@@ -109,6 +109,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
             favorite_count++;
         }
         console.log(favorited);
+        console.log(favorite_count);
     }
 
     const retweetHandler = () => {

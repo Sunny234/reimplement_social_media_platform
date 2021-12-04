@@ -220,38 +220,52 @@
     background-color: var(--tweet-hover-color);
 }
 
-.feed .tweet-actions {
+.feed .tweet-actions,
+.individual-tweet-main .tweet-actions,
+.feed-search .tweet-actions {
     margin-left: 25%;
     margin-bottom: 1%;
 }
 
-.feed .tweet-actions h3 {
+.feed .tweet-actions h3,
+.individual-tweet-main .tweet-actions h3,
+.feed-search .tweet-actions h3 {
     display: inline;
     font-weight: 400;
 }
 
-.feed .tweet-actions .tweet-action-button {
+.feed .tweet-actions .tweet-action-button,
+.individual-tweet-main .tweet-actions .tweet-action-button,
+.feed-search .tweet-actions .tweet-action-button {
     border: none;
     margin-left: 5%;
 }
 
-.feed .tweet-actions .tweet-action-button button {
+.feed .tweet-actions .tweet-action-button button,
+.individual-tweet-main .tweet-actions .tweet-action-button button,
+.feed-search .tweet-actions .tweet-action-button button {
     background-color: transparent;
     border: none;
 }
 
-.feed h2 {
+.feed h2,
+.individual-tweet-main h2,
+.feed-search h2{
     font-size: small;
     margin-bottom: 1%;
     font-weight: 500;
 }
 
-.feed h1 i {
+.feed h1 i,
+.individual-tweet-main h1 i,
+.feed-search h1 i {
     font-size: small;
     font-weight: 400;
 }
 
-.feed p {
+.feed p,
+.individual-tweet-main p,
+.feed-search p {
     display: inline;
     word-wrap: break-word;
 }
@@ -371,9 +385,9 @@
 /*********** Changes to Create Tweet for Replying ***********/
 .reply-tweet h1 {
     height: 1em;
-    width: 4em;
+    width: 8em;
     display: inline;
-    margin-left: 68vw;
+    margin-left: 64vw;
     margin-right: 1vw;
     font-weight: 400;
     text-align: center;
@@ -471,25 +485,24 @@
 /************************* Profile *************************/
 .profile {
     background-color: var(--main-bg-color);
-    width: 80vw;
-    overflow-y: auto;
     margin-top: 7vh;
+    height: 30vh;
 }
 
 .profile-container {
-    padding: 5%;
+    display: inline;
+    font-size: 2em;
 }
 
-.profile img {
+.profile .profile-img {
     height: 15vh;
     float: left;
     border-radius: 25em;
     margin-right: 3vw;
 }
-
-.profile h1 {
-    display: inline;
-    font-size: 2em;
+.profile-wrapper .feed-search {
+    height: 70vh;
+    margin-top: -7vh;
 }
 /************************************************************/
 

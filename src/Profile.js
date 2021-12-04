@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Search from "./components/Search"
 import Sidebar from "./components/Sidebar"
 import ProfileMain from './components/ProfileMain'
 
-
 const Profile = () => {
+    const [searchInput, setSearchInput] = useState("");
+
     return (
         <div className="main-container">
-            <Search/>
+            <Search searchInput = {searchInput} setSearchInput={setSearchInput}/>
             <Sidebar/>
             <ProfileMain/>
         </div>
