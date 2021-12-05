@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
+const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated }) => {
 
     //State/Ref used for word count
     const [wordCount, setWordCount] = useState("0");
@@ -44,9 +44,10 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles }) => {
             setTweetInput("");
             setWordCount("0");
             setCharacterCount("0");
+            setUpdated(updated + 1);
         })
         .catch(function (error) {
-            console.log(error);
+            alert(error.response.status + ": " + error.response.data["message"]);
         });
     };
 

@@ -1,70 +1,11 @@
-# Getting Started with Create React App
+Ranter Social, A Web-based Third Party Twitter Client.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Purpose:
 
-## Available Scripts
+The purpose of this software is to expand on Twitter’s existing capabilities through the client. Twitter provides a lot of existing functionality, but it can always be improved. One problem that Twitter currently experiences is how it handles longer topics and posts. Tweets are limited to the 280 character limit, forcing the users to use alternative methods to create a longer post. This can be resolved through several means already, whether it is through Twitter’s own client or Tall Tweets (which allow you to post a thread), using another social media platform built for longer messages, or using a service called Twitlonger. 
 
-In the project directory, you can run:
+Twitter currently offers poor solutions to these. While it does display threads if you focus on the tweet, it is still fragmented by Twitter’s existing UI, focusing on features that most users will ignore. The user can make a thread, but the thread still has to be carefully edited by the user to ensure each fragment is within the limit.
 
-### `npm start`
+While Twitlonger does provide a method for making longer tweets, the users still have to inconveniently load up another webpage in order to see the text instead of directly in their client. What this project aims on doing is improving the longer tweet experience by having the full tweet in one click in the client. The goal is to fix this inconvenient problem. There can be one client where the user can both read their tweets and post longer tweets without needing to open multiple tabs or scroll down a webpage for longer threads. They should also be able to write tweets longer than normal in the client in order to not disrupt their workflow. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This task is one interpretation of the task assigned to a student group in CSE 4550-03 of Fall 2021. The project objective is to extend existing social media platforms through recreating/reusing apis. The client may request for more additional possible features in this project. This student group is composed of 5 soon-to-be software engineers. The client is Dr. Bilal Khan, who requests that this group reimplement a social media platform to include new functionality.

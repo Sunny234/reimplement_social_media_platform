@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Search from './components/Search';
 import Sidebar from './components/Sidebar';
 import IndividualTweetMain from './components/IndividualTweetMain';
@@ -8,14 +8,14 @@ import {useParams } from 'react-router-dom';
 
 const IndividualTweet = () => {
     let { tweetID } = useParams();
-    let [ID, setID] = useState(`${tweetID}`);
+    //let [ID, setID] = useState(`${tweetID}`);
     const [searchInput, setSearchInput] = useState(``);
 
     return (
         <div className="main-container">
             <Search searchInput = {searchInput} setSearchInput = {setSearchInput}/>
             <Sidebar/>
-            <IndividualTweetMain tweetID={ID}/>
+            <IndividualTweetMain tweetID={`${tweetID}`}/>
             <CreateTweet styles="reply"/>
         </div>
     );

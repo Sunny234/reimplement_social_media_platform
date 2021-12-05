@@ -98,7 +98,7 @@ const ProfileMain = () => {
         setTweetsList(tweetList);
         })
         .catch(function (error) {
-        console.log(error);
+            alert(error.response.status + ": " + error.response.data["message"]);
         });
     };
 

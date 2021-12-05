@@ -1,11 +1,13 @@
 import React from 'react';
 import signInButton from "../images/sign-in-with-twitter-gray.png.twimg.2560.png";
 
-const LoginButton=()=> {
+
+const LoginButton=(history)=> {
 
     //Sends request to backend to get the authorization link
     const loginUser = () => {
         const axios = require('axios');
+
 
         const config = {
         method: 'post',
@@ -21,10 +23,10 @@ const LoginButton=()=> {
             //Stores session ID for requests to backend
             window.sessionStorage.setItem('id', response.data["ID"]);
             //Redirects user to input their pin
-            window.location.href="/pin";
+            history.push("/pin");
         })
         .catch(function (error) {
-            console.log(error);
+            alert(error.response.status + ": " + error.response.data["message"]);
         });
     };
 

@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const PIN = () => {
-
+    let navigate = useHistory();
     //Handles pin input
     const submitPinHandler = (e) => {
         e.preventDefault();
+
         console.log(typeof(e.target.value));
         console.log((typeof(window.sessionStorage.getItem("id"))));
         //Once the input reaches length of 7 try to fetch the tokens
@@ -29,11 +31,13 @@ const PIN = () => {
             window.sessionStorage.setItem('access_token', response.data["access_token"]);
             window.sessionStorage.setItem('access_secret', response.data["access_token_secret"]);
             //window.sessionStorage.setItem('user_id', response.data["user_id"]);
-            //Redirects to home
-            window.location.href="/home";
+            //Redirects to home 
+            //window.location.href="/home";
+            navigate.push("/home");
             })
             .catch(function (error) {
-            alert(error);
+            alert(error.response.status + ": " + error.response.data["message"]);
+            navigate.push("/");
             });
         }
     };

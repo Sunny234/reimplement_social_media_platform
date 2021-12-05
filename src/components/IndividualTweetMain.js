@@ -1,13 +1,11 @@
 import React, { useEffect, useState , useRef} from 'react';
 import Feed from './Feed';
-
  const IndividualTweetMain = ({tweetID}) => {
 
     let tweet = {};
     let tweetList = [];
     const tweetsList = useRef([]);
     const [alreadyDid, setAlreadyDid] = useState(false);
-
 
     const getIndividualTweet = () => {
         if (alreadyDid === false)
@@ -81,7 +79,7 @@ import Feed from './Feed';
             console.log(tweetsList);
             })
             .catch(function (error) {
-                console.log(error);
+                alert(error.response.status + ": " + error.response.data["message"]);
             });
         }   
     };
@@ -89,7 +87,7 @@ import Feed from './Feed';
     useEffect(()=>{
         getIndividualTweet();
     },[alreadyDid]);
-    
+
     return ( 
         <div>
             <Feed tweetsList={tweetsList.current} styles="individual-tweet-main"/>
