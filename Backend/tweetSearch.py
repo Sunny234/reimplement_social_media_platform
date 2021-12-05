@@ -3,7 +3,7 @@ import json
 import os
 
 def searchTweet(received):
-    transformed_received = received #json.loads(received)
+    transformed_received = json.loads(received)
     c = os.environ['API_KEY']
     d = os.environ['API_KEY_SECRET']
     e = transformed_received["token"]#os.environ['ACCESS_TOKEN']
@@ -26,7 +26,7 @@ def searchTweet(received):
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.TooManyRequests as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.TwitterServerErrror as error:
+    except tweepy.errors.TwitterServerError as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     
     for tweet in results:
@@ -52,5 +52,5 @@ def response_generator(code, response):
         }
 
 def lambda_handler(event, context):
-    print(event)
-    return searchTweet(event)
+    print(event['body'])
+    return searchTweet(event['body'])

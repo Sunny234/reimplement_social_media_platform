@@ -37,7 +37,7 @@ def PostTweet(input):
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                     except tweepy.errors.TooManyRequests as error:
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-                    except tweepy.errors.TwitterServerErrror as error:
+                    except tweepy.errors.TwitterServerError as error:
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                 else:
                     try:
@@ -52,7 +52,7 @@ def PostTweet(input):
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                     except tweepy.errors.TooManyRequests as error:
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-                    except tweepy.errors.TwitterServerErrror as error:
+                    except tweepy.errors.TwitterServerError as error:
                         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                     
             else:
@@ -68,7 +68,7 @@ def PostTweet(input):
                     return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                 except tweepy.errors.TooManyRequests as error:
                     return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-                except tweepy.errors.TwitterServerErrror as error:
+                except tweepy.errors.TwitterServerError as error:
                     return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
                 
                 
@@ -90,7 +90,7 @@ def PostTweet(input):
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.TooManyRequests as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-        except tweepy.errors.TwitterServerErrror as error:
+        except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         tweet_info = json.dumps(post_tweet._json, ensure_ascii = False, indent = 4)
         return response_generator(200, "Single-tweet success") #tweet_info
@@ -142,5 +142,4 @@ def response_generator(code, response):
 
 def lambda_handler(event, context):
     output = PostTweet(event['body'])
-    print(output)
     return output

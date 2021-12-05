@@ -23,6 +23,10 @@ def GetPIN(input):
         'oauth_token' : reqtoken,
         'oauth_token_secret': verifier
         }
+    db_table.delete_item(
+    Key = {
+        'ID': int(values["ID"])
+        })
     try:
         login.get_access_token(values["PIN"])
     except tweepy.errors.BadRequest as error:
@@ -35,19 +39,18 @@ def GetPIN(input):
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.TooManyRequests as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.TwitterServerErrror as error:
+    except tweepy.errors.TwitterServerError as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+   
     tokens.append(login.access_token)
     tokens.append(login.access_token_secret)
-    db_table.delete_item(
-        Key = {
-            'ID': int(values["ID"])
-            })
+
     actual_tokens = {
             "access_token": tokens[0],
-            "access_token_secret": tokens[1]
+            "access_token_secret": tokens[1]#,
+            #"user_id": tokens[2]
         }
-    return actual_tokens
+    return response_generator(200, json.dumps(actual_tokens))
     
 def response_generator(code, response):
     return {
@@ -62,13 +65,4 @@ def response_generator(code, response):
         }
 
 def lambda_handler(event, context):
-    return {
-        'statusCode' : 200,
-        'headers' : {
-            "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-            "Access-Control-Allow-Origin" : "*",
-            "Access-Control-Allow-Methods" : "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT"
-            },
-        'body': json.dumps(GetPIN(event['body']), ensure_ascii = False, indent = 4),
-        'isBase64Encoded': False
-        }
+    return GetPIN(event['body'])

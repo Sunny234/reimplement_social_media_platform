@@ -12,26 +12,45 @@ def LikeTweet(received):
     d = os.environ['API_KEY_SECRET']
     e = transformed_received["token"]
     f = transformed_received["secret"]
+    g = transformed_received["id"]
+    h = transformed_received["status"]
     auth = tweepy.OAuthHandler(c, d)
     auth.set_access_token(e, f)
     api = tweepy.API(auth, wait_on_rate_limit=True)
     
 # Likes the tweet of the given ID.
-    try
-        api.create_favorite(convert_ID)
-    except tweepy.errors.BadRequest as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.Unauthorized as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
-    except tweepy.errors.Forbidden as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.NotFound as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.TooManyRequests as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    except tweepy.errors.TwitterServerErrror as error:
-        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    return response_generator(200, "Liked successfully");
+    if (h = "like"):
+        try
+            api.create_favorite(g)
+        except tweepy.errors.BadRequest as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.Unauthorized as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+        except tweepy.errors.Forbidden as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.NotFound as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.TooManyRequests as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.TwitterServerError as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    else:
+        try
+            api.destroy_favorite(g)
+        except tweepy.errors.BadRequest as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.Unauthorized as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+        except tweepy.errors.Forbidden as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.NotFound as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.TooManyRequests as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        except tweepy.errors.TwitterServerError as error:
+            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    
+    return response_generator(200, "Liked/Unliked successfully");
     
 def response_generator(code, response):
     return {

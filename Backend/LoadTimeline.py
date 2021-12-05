@@ -32,7 +32,7 @@ def LoadTimeline(body):
         a = json.loads(f)
         timeline.append(a)
         print(a)
-    return response_generator(200, timeline)
+    return response_generator(200, json.dumps(timeline ,ensure_ascii = False, indent = 4))
     
 def response_generator(code, response):
     return {
