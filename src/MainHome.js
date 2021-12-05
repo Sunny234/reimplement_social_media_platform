@@ -11,6 +11,7 @@ const MainHome = () => {
     const [tweetsList, setTweetsList] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     const [updated, setUpdated] = useState(0);
+    let prevUpdated = updated;
 
     const tweetListContains = (list, id) => {
         for (let i = 0; i < list.length; i++) {
@@ -107,7 +108,15 @@ const MainHome = () => {
     };
 
     useEffect(()=>{
-        getTweets();
+        if (prevUpdated != updated)
+        {
+            window.sessionStorage.setItem("home_timeline_last_updated", 0);
+            getTweets();
+        }
+        else
+        {
+            getTweets();
+        }
     },[updated])
 
     return (
