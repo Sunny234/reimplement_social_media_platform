@@ -9,10 +9,11 @@ import {useParams } from 'react-router-dom';
 const IndividualTweet = () => {
     let { tweetID } = useParams();
     let [ID, setID] = useState(`${tweetID}`);
+    const [searchInput, setSearchInput] = useState(``);
 
     return (
         <div className="main-container">
-            <Search/>
+            <Search searchInput = {searchInput} setSearchInput = {setSearchInput}/>
             <Sidebar/>
             <IndividualTweetMain tweetID={ID}/>
             <CreateTweet styles="reply"/>

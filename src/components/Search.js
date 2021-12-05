@@ -12,7 +12,7 @@ const Search = ({searchInput, setSearchInput}) => {
     }
 
     //Directs user to search results page
-    const searchInputHandler = (e) => {
+    const searchInputHandler = () => {
         if(tempSearch !== "") {
             setSearchInput(tempSearch);
             return `/search/${tempSearch}`;

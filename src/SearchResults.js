@@ -103,7 +103,7 @@ const SearchResults = () => {
                     "favorite_count": favorite_count,
                     "id": tweet_id 
                 });
-                console.log("ADDED!");
+                console.log(response.data[x]);
             }
         }
         setResultsList(resultList);
@@ -119,7 +119,7 @@ const SearchResults = () => {
 
     return (
         <div className="search-results-container">
-            <Search searchInput = {searchInput} setSearchInput={setSearchInput}/>
+            <Search searchInput = {searchInput} setSearchInput ={setSearchInput}/>
             <Sidebar/>
             <Feed tweetsList={resultsList} styles="feed-search" setTweetsList={setResultsList}/>
         </div>
