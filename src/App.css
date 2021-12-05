@@ -9,13 +9,12 @@
     --create-tweet-color: rgb(55, 55, 55);
     --create-tweet-hover-color: rgb(70,70,70);
     --sidebar-list-hover-color: rgba(255, 255, 255, 0.2);
-    --sidebar-list-selected-color: rgb(45,45,45);
-    --sign-out-button-color: rgb(150, 0, 0);
-    --sign-out-button-hover-color: rgb(201, 0, 0);
+    --sidebar-list-selected-color: rgb(45, 45, 45);
+    --sign-out-button-color: transparent;
+    --sign-out-button-hover-color: rgb(218, 157, 45);
     --scroll-handle-color: rgb(160, 160, 160);
     --scroll-handle-hover-color: rgb(100, 100, 100);
 }
-
 
 * {
     margin: 0;
@@ -162,6 +161,7 @@
 
 .sidebar ul li a:hover {
     background-color: var(--sidebar-list-hover-color);
+    
 }
 
 .sidebar ul li .sign-out-button {
@@ -171,6 +171,7 @@
 
 .sidebar ul li .sign-out-button:hover {
     background-color: var(--sign-out-button-hover-color);
+    color: black;
 }
 
 .sidebar-button-selected { 
@@ -216,41 +217,48 @@
     min-height: 13vh;
 }
 
-.feed .tweet-hover:hover, .individual-tweet-main .tweet-hover:hover {
+.feed .tweet-hover:hover,
+.individual-tweet-main .tweet-hover:hover,
+.replies .tweet-hover:hover {
     background-color: var(--tweet-hover-color);
 }
 
 .feed .tweet-actions,
 .individual-tweet-main .tweet-actions,
-.feed-search .tweet-actions {
+.feed-search .tweet-actions,
+.replies .tweet-actions {
     margin-left: 25%;
     margin-bottom: 1%;
 }
 
 .feed .tweet-actions h3,
 .individual-tweet-main .tweet-actions h3,
-.feed-search .tweet-actions h3 {
+.feed-search .tweet-actions h3,
+.replies .tweet-actions h3 {
     display: inline;
     font-weight: 400;
 }
 
 .feed .tweet-actions .tweet-action-button,
 .individual-tweet-main .tweet-actions .tweet-action-button,
-.feed-search .tweet-actions .tweet-action-button {
+.feed-search .tweet-actions .tweet-action-button,
+.replies .tweet-actions .tweet-action-button {
     border: none;
     margin-left: 5%;
 }
 
 .feed .tweet-actions .tweet-action-button button,
 .individual-tweet-main .tweet-actions .tweet-action-button button,
-.feed-search .tweet-actions .tweet-action-button button {
+.feed-search .tweet-actions .tweet-action-button button,
+.replies .tweet-actions .tweet-action-button button {
     background-color: transparent;
     border: none;
 }
 
 .feed h2,
 .individual-tweet-main h2,
-.feed-search h2{
+.feed-search h2,
+.replies h2 {
     font-size: small;
     margin-bottom: 1%;
     font-weight: 500;
@@ -258,14 +266,16 @@
 
 .feed h1 i,
 .individual-tweet-main h1 i,
-.feed-search h1 i {
+.feed-search h1 i,
+.replies h1 i {
     font-size: small;
     font-weight: 400;
 }
 
 .feed p,
 .individual-tweet-main p,
-.feed-search p {
+.feed-search p,
+.replies p {
     display: inline;
     word-wrap: break-word;
 }
@@ -274,11 +284,7 @@
 /********************* Individual Tweet *********************/
 .individual-tweet-main {
     background-color: var(--main-bg-color);
-    height: 76vh;
-    width: 80vw;
-    overflow-y: auto;
-    margin-top: 7vh;
-    margin-bottom: 15vh;
+    height: auto;
 }
 
 .individual-tweet-main .tweet-container {
@@ -316,6 +322,70 @@
 }
 
 .individual-tweet-main .tweet-hover {
+    border-bottom: 1px var(--tweet-hover-border-color) solid;
+    min-height: 23vh;
+}
+
+.individual-tweet-wrapper {
+    display: block;
+    width: 80vw;
+    overflow-y: scroll;
+    margin-bottom: 15vh;
+    margin-top: 7vh;
+}
+/************************************************************/
+
+/*********************** Replies ***********************/
+.replies {
+    background-color: var(--main-bg-color);
+    height: auto;
+    width: 80vw;
+    margin-top: 0;
+}
+
+.replies-header {
+    background-color: var(--main-bg-color);
+    padding-left: 10vw;
+    padding-bottom: 1vh;
+    padding-top: 2vh;
+    font-size: x-large;
+}
+
+.replies .tweet-container {
+    margin-left: 15%;
+    margin-right: 5%;
+    padding: 4%;
+}
+
+.replies .tweet-container .tweet-profile-image {
+    float: left;
+    height: 6vh;
+    border-radius: 250px;
+    margin-right: 1%;
+}
+
+.replies .tweet-container img {
+    display: block;
+    height: 15vh;
+}
+
+.replies h2 {
+    font-size: small;
+    margin-bottom: 1%;
+    font-weight: 500;
+}
+
+.replies h1 i {
+    font-size:medium;
+    font-weight: 400;
+}
+
+.replies p {
+    display: inline;
+    word-wrap: break-word;
+}
+
+.replies .tweet-hover {
     border-bottom: 1px var(--tweet-hover-border-color) solid;
     min-height: 23vh;
 }
@@ -487,22 +557,27 @@
     background-color: var(--main-bg-color);
     margin-top: 7vh;
     height: 30vh;
+    border-bottom: 1px solid var(--tweet-hover-border-color);
+    padding-bottom: 1%;
 }
 
 .profile-container {
-    display: inline;
+    display: inline-block;
     font-size: 2em;
+    padding: 5vh 5vw;
+}
+
+.profile h1 {
+    text-align: center;
 }
 
 .profile .profile-img {
     height: 15vh;
-    float: left;
     border-radius: 25em;
-    margin-right: 3vw;
 }
 .profile-wrapper .feed-search {
-    height: 70vh;
-    margin-top: -7vh;
+    height: 63vh;
+    margin-top:0;
 }
 /************************************************************/
 

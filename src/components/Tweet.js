@@ -10,7 +10,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     const viewSingleTweetHandler = (e) => {
         return `/tweet/${id}`;
     };
-    
+
     //Checks whether Tweet has an image
     const hasImage = () => {
         if(tweet_image !== null) {

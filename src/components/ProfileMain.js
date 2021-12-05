@@ -5,8 +5,16 @@ import Feed from "./Feed"
 const ProfileMain = () => {
     let tweetList = [];
     const [tweetsList, setTweetsList] = useState([]);
-    let userProfileDict={};
     let { user_ID } = useParams();
+    let userProfileDict = {
+        user: null,
+        bio: null,
+        following_count: null,
+        followers_count: null,
+        screen_name: null,
+        profile_image: null
+    };
+    
 
     const tweetListContains = (list, id) => {
         for (let i = 0; i < list.length; i++) {
@@ -16,6 +24,8 @@ const ProfileMain = () => {
         }
         return false;
     };
+
+    console.log(user_ID)
 
     const getTweets = () => {
         var axios = require('axios');
@@ -36,16 +46,14 @@ const ProfileMain = () => {
         }
         axios(config)
         .then(function (response) {
-        let username = response.data[0]["name"];
-        let screen_name = response.data[0]["screen_name"];
-        let profile_image = response.data[0]["profile_image_url_https"];
-        userProfileDict = {
-            "user": username,
-            "screen_name": screen_name,
-            "profile_image": profile_image
-        };
-        window.sessionStorage.setItem("user_info", userProfileDict);
-        console.log(userProfileDict["user"]);
+        console.log(response.data);
+        userProfileDict.user = response.data[0]["name"];
+        userProfileDict.bio = response.data[0]["description"];
+        userProfileDict.following_count = response.data[0]["friends_count"];
+        userProfileDict.followers_count = response.data[0]["followers_count"];
+        userProfileDict.screen_name = response.data[0]["screen_name"];
+        userProfileDict.profile_image = response.data[0]["profile_image_url_https"];
+        window.sessionStorage.setItem("user_info", JSON.stringify(userProfileDict));
         for(let x in response.data[1]) {
             let username = response.data[1][x]["user"]["name"];
             let screen_name = response.data[1][x]["user"]["screen_name"];
@@ -109,11 +117,13 @@ const ProfileMain = () => {
     return (
         <div className="profile-wrapper">
             <div className="profile">
-                <div className="profile-container">
-                    <span>
-                        <img src="" className="profile-img" alt="Profile"/><h1>{}</h1>
-                    </span>
-                </div>
+                <span className="profile-container">
+                    <img src={JSON.parse(window.sessionStorage.getItem("user_info")).profile_image} className="profile-img" alt="Profile"/><h1>{JSON.parse(window.sessionStorage.getItem("user_info")).user}</h1>
+
+                    <p>{JSON.parse(window.sessionStorage.getItem("user_info")).bio}</p>
+                    <h2>{JSON.parse(window.sessionStorage.getItem("user_info")).following_count} Following</h2>
+                    <h2>{JSON.parse(window.sessionStorage.getItem("user_info")).followers_count} Followers</h2>
+                </span>
             </div>
             <Feed tweetsList={tweetsList} styles="feed-search"/>
         </div>
