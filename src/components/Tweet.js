@@ -36,7 +36,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
             return (
                 <span className="tweet-action-button">
                     <button onClick={likeHandler}>
-                        <i style={{color: "red"}} className="fas fa-heart"></i>
+                        <i style={{color: "orange"}} className="fas fa-heart"></i>
                     </button>
                     <h3> {rfavorited[1]}</h3>
                 </span>
@@ -45,7 +45,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
             return (
                 <span className="tweet-action-button">
                     <button onClick={likeHandler}>
-                        <i className="far fa-heart"></i>
+                        <i style={{color: "white"}} className="far fa-heart"></i>
                     </button>
                     <h3> {rfavorited[1]}</h3>
                 </span>

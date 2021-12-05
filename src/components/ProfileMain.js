@@ -44,7 +44,7 @@ const ProfileMain = () => {
             "screen_name": screen_name,
             "profile_image": profile_image
         };
-        window.sessionStorage.setItem("user_info") = userProfileDict;
+        window.sessionStorage.setItem("user_info", userProfileDict);
         console.log(userProfileDict["user"]);
         for(let x in response.data[1]) {
             let username = response.data[1][x]["user"]["name"];
