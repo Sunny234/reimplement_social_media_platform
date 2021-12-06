@@ -2,7 +2,7 @@ import tweepy
 import json
 import os
 
-charLimit = 280
+charLimit = 272
 
 def PostTweet(input):
     print(input)
@@ -19,7 +19,8 @@ def PostTweet(input):
     api = tweepy.API(auth, wait_on_rate_limit=True)
   
     if (len(g) > 280):
-        tweets = tweet_parser(message)
+        tweets = tweet_parser(g)
+        print(tweets)
         prev_id = 0
         tweet_info = ""
         for i in range(len(tweets)):   
@@ -78,20 +79,36 @@ def PostTweet(input):
         return response_generator(200, "Multi-tweet success") #tweet_info
     else:
         #Single Tweet
-        try:
-            post_tweet = api.update_status(g)
-        except tweepy.errors.BadRequest as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-        except tweepy.errors.Unauthorized as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
-        except tweepy.errors.Forbidden as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-        except tweepy.errors.NotFound as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-        except tweepy.errors.TooManyRequests as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-        except tweepy.errors.TwitterServerError as error:
-            return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        if (isReply):
+            try:
+                post_tweet = api.update_status(g, in_reply_to_status_id=replyID, auto_populate_reply_metadata=True)
+            except tweepy.errors.BadRequest as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.Unauthorized as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+            except tweepy.errors.Forbidden as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.NotFound as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.TooManyRequests as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.TwitterServerError as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        else:
+            try:
+                post_tweet = api.update_status(g)
+            except tweepy.errors.BadRequest as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.Unauthorized as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+            except tweepy.errors.Forbidden as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.NotFound as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.TooManyRequests as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+            except tweepy.errors.TwitterServerError as error:
+                return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         tweet_info = json.dumps(post_tweet._json, ensure_ascii = False, indent = 4)
         return response_generator(200, "Single-tweet success") #tweet_info
 
@@ -103,10 +120,9 @@ def tweet_parser(message):
     word_temp = {"pos": 0, "word":""}
     while i < len(message):
         message_temp = ""
-        while (len(message_temp) + len(word_temp) < charLimit) and i < len(message):
+        while (len(message_temp) + len(word_temp) + 8 < charLimit) and i < len(message):
             message_temp += word_temp["word"] + " "
             i = word_temp["pos"]
-            print(i)
             word_temp = word_parser(i, message)
         messages.append(message_temp)
     for j in range(len(messages)):

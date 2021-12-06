@@ -101,8 +101,8 @@ const MainHome = () => {
 
             })
             .catch(function (error) {
-                //alert(error.response.status + ": " + error.response.data["message"]);
-                alert(error);
+                alert(error.response.status + ": " + error.response.data["message"]);
+                //alert(error);
             });
         }
     };

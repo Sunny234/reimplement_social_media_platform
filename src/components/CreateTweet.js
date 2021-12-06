@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 
-const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated }) => {
+const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated, replyID }) => {
 
     //State/Ref used for word count
     const [wordCount, setWordCount] = useState("0");
     const [characterCount, setCharacterCount] = useState("0");
-    const textRef = useRef();
+    const textRef = useRef("");
 
     //Function gets what is in the <textarea> and makes an array of all the words that are seperated by spaces
     const getWords = () => {
@@ -19,7 +19,9 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated })
 
     //Updates State when User types
     const tweetInputHandler = (e) => {
+        console.log(e.target.value);
         setTweetInput(e.target.value);
+        console.log(tweetInput);
         setWordCount(getWords());
         setCharacterCount(getCharacterCount());
     };
@@ -28,7 +30,17 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated })
     const submitTweetHandler = (e) => {
         e.preventDefault();
         const axios = require('axios');
-        const data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "is_reply": "False", "reply_ID": "0"};
+        let data = {}
+        console.log(tweetInput);
+        if (replyID != null)
+        {
+            data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "is_reply": "True", "reply_ID": replyID};
+        }
+        else
+        {
+            data =  {"message": tweetInput, "access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "is_reply": "False", "reply_ID": "0"};
+        }
+        
 
         const config = {
         method: 'post',
@@ -56,7 +68,7 @@ const CreateTweet = ({ tweetInput, setTweetInput, styles, updated, setUpdated })
         if(styles === "reply") {
             return (
                 <form className="reply-tweet">
-                    <textarea onChange={tweetInputHandler} className="create-tweet-text" placeholder="Say your side..." type="text" value={tweetInput}></textarea>
+                    <textarea ref={textRef} onChange={tweetInputHandler} className="create-tweet-text" placeholder="Say your side..." type="text" value={tweetInput}></textarea>
                     <span className="create-tweet-footer">
                     <h1>{wordCount} | {characterCount}</h1>
                     <button onClick={submitTweetHandler} type="submit" className="create-tweet-button">Tweet</button>

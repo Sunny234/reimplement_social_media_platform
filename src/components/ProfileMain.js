@@ -8,7 +8,7 @@ const ProfileMain = () => {
     const tweetsList = useRef([]);
     const [alreadyDid, setAlreadyDid] = useState(false);
     let { user_ID } = useParams();
-    const userProfileDict = useRef({user: "loading", bio: "loading", following_count: "loading", followers_count: "loading", screen_name: "loading", profile_image: loadingIcon});
+    const userProfileDict = useRef({user: "loading", bio: "loading", following_count: "loading", followers_count: "loading", screen_name: "loading", profile_image: loadingIcon, follow: null});
     let userProfileDictTemp = {
         user: "loading",
         bio: "loading",
@@ -16,7 +16,7 @@ const ProfileMain = () => {
         followers_count: "loading",
         screen_name: "loading",
         profile_image: loadingIcon,
-        follow: "loading"
+        follow: null
     };
     
 
