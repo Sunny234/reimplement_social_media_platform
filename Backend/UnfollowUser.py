@@ -2,17 +2,23 @@ import tweepy
 import json
 import os
 
-def LoadTimeline(body):
-    tokens = json.loads(body)
+def UnfollowUser(received):
+# Loads the given tweet ID and converts it from JSON into an integer value "tweet_ID".
+    tweet_ID = json.loads(received)
+    Converted_ID = int(convert_ID["id"])
+    
+# Access tokens for Twitter access.
     c = os.environ['API_KEY']
     d = os.environ['API_KEY_SECRET']
-    e = tokens['access_token'] #os.environ['ACCESS_TOKEN']
-    f = tokens['access_token_secret'] #os.environ['ACCESS_TOKEN_SECRET']
+    e = transformed_received["token"]
+    f = transformed_received["secret"]
     auth = tweepy.OAuthHandler(c, d)
     auth.set_access_token(e, f)
-    api = tweepy.API(auth, wait_on_rate_limit = True)
+    api = tweepy.API(auth, wait_on_rate_limit=True)
+    
+# Unfollows the user account based on the given ID.
     try:
-        cursor = api.user_timeline(tweet_mode="extended")
+        api.unfollow_user(convert_ID)
     except tweepy.errors.BadRequest as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.Unauthorized as error:
@@ -25,15 +31,8 @@ def LoadTimeline(body):
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     except tweepy.errors.TwitterServerErrror as error:
         return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    timeline = []
-    for i in range(len(cursor)):
-        userTweet = cursor[i]
-        f = json.dumps(userTweet._json, ensure_ascii = False, indent = 4)
-        a = json.loads(f)
-        timeline.append(a)
-        print(a)
-    return response_generator(200, json.dumps(timeline ,ensure_ascii = False, indent = 4))
-    
+    return response_generator(200, "Unfollowed successfully");
+
 def response_generator(code, response):
     return {
             'statusCode' : code,
@@ -44,7 +43,6 @@ def response_generator(code, response):
             },
             'body': response,
             'isBase64Encoded': False
-        }
-        
+
 def lambda_handler(event, context):
-    return LoadTimeline(event['body'])
+    return UnfollowUser(event['body'])

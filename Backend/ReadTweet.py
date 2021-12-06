@@ -20,7 +20,20 @@ def ReadTweet(received):
     new_tweet_info = json.loads(tweet_info)
     search_query = "from:" + new_tweet_info["user"]["screen_name"]
     prev_id = new_tweet_info["id"]
-    current_search_results = api.search_tweets(q=search_query,since_id=prev_id,tweet_mode="extended")
+    try
+        current_search_results = api.search_tweets(q=search_query,since_id=prev_id,tweet_mode="extended")
+    except tweepy.errors.BadRequest as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    except tweepy.errors.Unauthorized as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+    except tweepy.errors.Forbidden as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    except tweepy.errors.NotFound as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    except tweepy.errors.TooManyRequests as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+    except tweepy.errors.TwitterServerError as error:
+        return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     tweet_list = [new_tweet_info]
     found = True
     while found:  
@@ -30,14 +43,28 @@ def ReadTweet(received):
             if transformed_tweet["in_reply_to_status_id"] == prev_id:
                 tweet_list.append(transformed_tweet)
                 prev_id = transformed_tweet["id"]
-                current_search_results = api.search_tweets(q=search_query,since_id=prev_id, tweet_mode="extended")
+                try
+                    current_search_results = api.search_tweets(q=search_query,since_id=prev_id, tweet_mode="extended")
+                except tweepy.errors.BadRequest as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+                except tweepy.errors.Unauthorized as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));                    
+                except tweepy.errors.Forbidden as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+                except tweepy.errors.NotFound as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+                except tweepy.errors.TooManyRequests as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+                except tweepy.errors.TwitterServerError as error:
+                    return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+                
                 found = True
                 break
         
     
     transformed_tweet_info = new_tweet_info
     transformed_tweet_info["full_text"] = combine_text(tweet_list)
-    return transformed_tweet_info
+    return response_generator(200, transformed_tweet_info)
 
 def combine_text(tweet_list):
     newText = ""
@@ -45,14 +72,17 @@ def combine_text(tweet_list):
         newText = newText + tweet["full_text"] + "\n"
     return newText
 
-def lambda_handler(event, context):
+def response_generator(code, response):
     return {
-        'statusCode': 200,
-        'headers' : {
-            "Access-Control-Allow-Origin" : "*",
+            'statusCode' : code,
+            'headers' : {
             "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Origin" : "*",
             "Access-Control-Allow-Methods" : "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT"
-        },
-        'body': json.dumps(ReadTweet(event['body']), ensure_ascii = False, indent = 4),
-        'isBase64Encoded': False
-    }
+            },
+            'body': response,
+            'isBase64Encoded': False
+        }
+
+def lambda_handler(event, context):
+    return ReadTweet(event['body'])

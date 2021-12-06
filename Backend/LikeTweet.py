@@ -19,9 +19,9 @@ def LikeTweet(received):
     api = tweepy.API(auth, wait_on_rate_limit=True)
     
 # Likes the tweet of the given ID.
-    if (h = "retweet"):
+    if (h = "like"):
         try
-            api.retweet(g)
+            api.create_favorite(g)
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -36,7 +36,7 @@ def LikeTweet(received):
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     else:
         try
-            api.unretweet(g)
+            api.destroy_favorite(g)
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -50,7 +50,7 @@ def LikeTweet(received):
         except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     
-    return response_generator(200, "Retweeted/unretweeted successfully");
+    return response_generator(200, "Liked/Unliked successfully");
     
 def response_generator(code, response):
     return {

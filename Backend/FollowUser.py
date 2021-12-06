@@ -2,26 +2,28 @@ import tweepy
 import json
 import os
 
-def LikeTweet(received):
+def FollowUser(received):
 # Loads the given tweet ID and converts it from JSON into an integer value "tweet_ID".
     tweet_ID = json.loads(received)
     Converted_ID = int(convert_ID["id"])
-    
+    User_ID = 0; # !!!!Need to find out how to pass multiple Id's.!!!!
+
 # Access tokens for Twitter access.
     c = os.environ['API_KEY']
     d = os.environ['API_KEY_SECRET']
     e = transformed_received["token"]
     f = transformed_received["secret"]
-    g = transformed_received["id"]
-    h = transformed_received["status"]
     auth = tweepy.OAuthHandler(c, d)
     auth.set_access_token(e, f)
     api = tweepy.API(auth, wait_on_rate_limit=True)
+
+# Check follow conditions between accounts.
+    followage = api.get_friendship(source_id = User_ID, target_id = Converted_ID)\
     
-# Likes the tweet of the given ID.
-    if (h = "retweet"):
+# Follows the user account based on the given ID.
+    if followage[0].following == 0;
         try
-            api.retweet(g)
+            api.follow_user(convert_ID)
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -34,9 +36,10 @@ def LikeTweet(received):
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
+        return response_generator(200, "Followed Successfully");
     else:
         try
-            api.unretweet(g)
+            api.unfollow_user(convert_ID)
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -49,9 +52,8 @@ def LikeTweet(received):
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    
-    return response_generator(200, "Retweeted/unretweeted successfully");
-    
+        return response_generator(200, "Unfollowed Successfully");
+
 def response_generator(code, response):
     return {
             'statusCode' : code,
@@ -64,5 +66,6 @@ def response_generator(code, response):
             'isBase64Encoded': False
         }
 
+
 def lambda_handler(event, context):
-    return LikeTweet(event['body'])
+    return FollowUser(event['body'])

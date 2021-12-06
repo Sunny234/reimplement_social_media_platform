@@ -2,26 +2,24 @@ import tweepy
 import json
 import os
 
-def LikeTweet(received):
-# Loads the given tweet ID and converts it from JSON into an integer value "tweet_ID".
-    tweet_ID = json.loads(received)
-    Converted_ID = int(convert_ID["id"])
-    
-# Access tokens for Twitter access.
+def gatherReply(received):
+    transformed_received = json.loads(received)
     c = os.environ['API_KEY']
     d = os.environ['API_KEY_SECRET']
-    e = transformed_received["token"]
-    f = transformed_received["secret"]
-    g = transformed_received["id"]
-    h = transformed_received["status"]
+    e = transformed_received["token"]#os.environ['ACCESS_TOKEN']
+    f = transformed_received["secret"]#os.environ['ACCESS_TOKEN_SECRET']
+    g = transformed_received["replyID"]
+    h = transformed_received["replyUserName"]
+    j = transformed_received["maxID"]
     auth = tweepy.OAuthHandler(c, d)
     auth.set_access_token(e, f)
     api = tweepy.API(auth, wait_on_rate_limit=True)
-    
-# Likes the tweet of the given ID.
-    if (h = "retweet"):
-        try
-            api.retweet(g)
+    tweets = []
+    if (j == "null"):       
+        try:
+            search_query = "to:" + h
+            results = tweepy.Cursor(api.search_tweets, q=search_query, result_type="recent", tweet_mode="extended", since_id=g, count=100).items(200) #api.search_tweets(q=search_query, result_type='recent', tweet_mode="extended", since_id=g, count=100).pages(2)
+            print("ran")
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -35,8 +33,9 @@ def LikeTweet(received):
         except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
     else:
-        try
-            api.unretweet(g)
+        try:
+            search_query = "to:" + h
+            results = tweepy.Cursor(api.search_tweets, q=search_query, result_type="recent", tweet_mode="extended", since_id=g, count=100, max_id=j).items(200) #api.search_tweets(q=search_query, result_type='recent', tweet_mode="extended", since_id=g, count=100, max_id=j).pages(2)
         except tweepy.errors.BadRequest as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.Unauthorized as error:
@@ -49,9 +48,19 @@ def LikeTweet(received):
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
         except tweepy.errors.TwitterServerError as error:
             return response_generator(error.response.status_code, str(error.response.json()["errors"][0]["message"]));
-    
-    return response_generator(200, "Retweeted/unretweeted successfully");
-    
+    last_id = 0;
+    for tweet in results:
+        if tweet._json["in_reply_to_status_id_str"] == g:
+            data = json.loads(json.dumps(tweet._json, ensure_ascii = False, indent = 4))
+            tweets.append(data)
+        last_id = tweet._json["id_str"]
+        
+    print(tweets)
+    results_return = []
+    results_return.append(tweets)
+    results_return.append(last_id)
+    return response_generator(200, tweets)
+
 def response_generator(code, response):
     return {
             'statusCode' : code,
@@ -65,4 +74,4 @@ def response_generator(code, response):
         }
 
 def lambda_handler(event, context):
-    return LikeTweet(event['body'])
+    return gatherReply(event['body'])
