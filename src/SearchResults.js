@@ -19,30 +19,6 @@ const SearchResults = () => {
         }
         return false;
     };
-    /*
-    const axios = require('axios');
-    const data = '1450591326479831040';
-
-    const config = {
-        method: 'get',
-        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/ReadTweet',
-        headers: { 
-        'Content-Type': 'text/plain',
-        },
-        data : data
-    };
-
-    axios(config)
-    .then(function (response) {
-        console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-         console.log(error);
-    });*/
-
-
-    //Fetch Timeline
-    //Get Tweets from Timeline into State
     const getResults = () => {
         var axios = require('axios');
         let data = {"searchQuery":searchInput, "token": window.sessionStorage.getItem("access_token"), "secret":window.sessionStorage.getItem("access_secret")}

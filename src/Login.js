@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginButton from './components/LoginButton'
 import { useHistory } from 'react-router-dom';
+import logo from './images/ranter.png';
 
 const Login = () => {
 
@@ -11,7 +12,8 @@ const Login = () => {
     return (
         <div className="login-container">
             <span>
-                <h4>R</h4><i className="fas fa-dove fa-3x" style={{color: "#FF6C00"}}></i><h4>mbler</h4>
+                <img src={logo} className="logo"></img>
+                <h3 color="orange" className="name">Ranter</h3>
             </span>
             <LoginButton history={history} push={history.push}/>
         </div>

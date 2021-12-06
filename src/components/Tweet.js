@@ -15,7 +15,7 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
     const hasImage = () => {
         if(tweet_image !== null) {
             return (
-                <img src={tweet_image} alt={`${tweet_image}`} className="tweeted_image"></img>
+                <img src={tweet_image} alt={`${tweet_image}`} className="tweeted_image"/>
             );
         } else {
             return;
@@ -80,32 +80,45 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
         if(retweeted_user !== null) {
             return (
                 <div className="tweet-container">
+                   
                     <h2>{user} Retweeted</h2>
                     {isReply()}
+                    <Link to={`/profile/${screen_name}`} className="link">
                     <img src={retweeted_profile_image} alt={retweeted_screen_name} className="tweet-profile-image"></img>
+                    </Link>
                     <div className="content-wrapper">
                         <h1>{retweeted_user} <i>@{retweeted_screen_name}</i></h1>
                         <p>{retweeted_text}</p>
                         {hasImage()}
+
                     </div>
+
                 </div>
             );
         } else {
             return (
                 <div className="tweet-container">
+
                     {isReply()}
+                    <Link to={`/profile/${screen_name}`} className="link">
                     <img src={profile_image} alt={screen_name} className="tweet-profile-image"></img>
+                    </Link>
                     <h1>{user} <i>@{screen_name}</i></h1>
                     <p>{tweet_content}</p>
                     {hasImage()}
+
                 </div>
             );
         }
     };
 
     const likeHandler = () => {
-        /**var axios = require('axios');
-        let data = {"access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id")};
+        var axios = require('axios');
+        let data = {}
+        if (rfavorited[0])
+            data = {"token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id"), "status": "unlike", "id": id};
+        else
+            data = {"token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id"), "status": "like", "id": id};  
         var config = {
         method: 'post',
         url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/liketweet',
@@ -116,36 +129,45 @@ const Tweet = ({user, screen_name, profile_image, tweet_content, tweet_image,  i
         }
         axios(config)
         .then(function (response) {
-            if (response.data["Action"] == "liked")
-            {
-                favorited = true;
-            }
-            else (response.data["Action"] == "unliked")
-            {
-                favorited = false;
+            console.log(response.data)
+            if(rfavorited[0] === true) {
+                setFavorited([false, rfavorited[1] - 1]);
+            } else {
+                setFavorited([true, rfavorited[1] + 1]);
             }
         })
         .catch(function (error) {
-        console.log(error);
-        });*/
-        console.log(rfavorited);
-        if(rfavorited[0] === true) {
-            setFavorited([false, rfavorited[1] - 1]);
-        } else {
-            setFavorited([true, rfavorited[1] + 1]);
-        }
-        console.log(favorited);
-        console.log(favorite_count);
+            alert(error.response.status + ": " + error.response.data["message"]);
+        });
     }
 
     const retweetHandler = () => {
-        console.log(rretweeted);
-        if(rretweeted[0] === true) {
-            setRetweeted([false, rretweeted[1] - 1]);
-        } else {
-            setRetweeted([true, rretweeted[1] + 1]);
+        var axios = require('axios');
+        let data = {}
+        if (rretweeted[0])
+            data = {"token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id"), "status": "unretweet", "id": id};
+        else
+            data = {"token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret"), "user_id": window.sessionStorage.getItem("user_id"), "status": "retweet", "id": id};  
+        var config = {
+        method: 'post',
+        url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/retweet',
+        headers: { 
+            'Content-Type': 'text/plain'
+        },
+        data: data
         }
-        console.log(favorited);
+        axios(config)
+        .then(function (response) {
+            console.log(response.data);
+            if(rretweeted[0] === true) {
+                setRetweeted([false, rretweeted[1] - 1]);
+            } else {
+                setRetweeted([true, rretweeted[1] + 1]);
+            }
+        })
+        .catch(function (error) {
+            alert(error.response.status + ": " + error.response.data["message"]);
+        });
     }
 
     useEffect(()=>{

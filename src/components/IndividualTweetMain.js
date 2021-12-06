@@ -4,10 +4,11 @@ import Feed from './Feed';
 
     let tweet = {};
     let tweetList = [];
+    let replyUsername = ""
     const tweetsList = useRef([]);
     const [alreadyDid, setAlreadyDid] = useState(false);
     let replyList = [];
-    const [repliesList, setRepliesList] = useState([]);
+    const repliesList = useRef([]);
 
     const getIndividualTweet = () => {
         if (alreadyDid === false)
@@ -29,6 +30,7 @@ import Feed from './Feed';
             console.log(response.data);
             let username = response.data["user"]["name"];
             let screen_name = response.data["user"]["screen_name"];
+            replyUsername = screen_name;
             let profile_image = response.data["user"]["profile_image_url_https"]
             let tweet_id = response.data["id_str"];
             let text = response.data["full_text"];
@@ -77,10 +79,12 @@ import Feed from './Feed';
             tweetList.push(tweet);
             tweetsList.current = tweetList;
             console.log(`${tweet}`);
-            setAlreadyDid(true);
             console.log(tweetsList);
+            getReplies();
+            setAlreadyDid(true);
             })
             .catch(function (error) {
+                console.log(error);
                 alert(error.response.status + ": " + error.response.data["message"]);
             });
         }   
@@ -96,11 +100,13 @@ import Feed from './Feed';
     };
 
     const getReplies = () => {
+        if (alreadyDid === false)
+        {
             var axios = require('axios');
-            let data = {"access_token": window.sessionStorage.getItem("access_token"), "access_token_secret": window.sessionStorage.getItem("access_secret") };
+            let data = {"token": window.sessionStorage.getItem("access_token"), "secret": window.sessionStorage.getItem("access_secret"), "replyID": tweetID, "replyUserName": replyUsername, "maxID": "null" };
             var config = {
             method: 'post',
-            url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/LoadTimeline',
+            url: 'https://v0xrcmlje7.execute-api.us-west-1.amazonaws.com/default/gatherreplies',
             headers: { 
                 'Content-Type': 'text/plain'
             },
@@ -157,24 +163,26 @@ import Feed from './Feed';
                     });
                 }
             }
-            setRepliesList(replyList);
+            tweetsList.current = tweetList;
+            repliesList.current = replyList;
+
             })
             .catch(function (error) {
-                //alert(error.response.status + ": " + error.response.data["message"]);
-                alert(error);
+                alert(error.response.status + ": " + error.response.data["message"]);
+                //alert(error);
             });
+        }
     };
 
     useEffect(()=>{
         getIndividualTweet();
-        getReplies();
     },[alreadyDid]);
 
     return ( 
         <div className="individual-tweet-wrapper">
             <Feed tweetsList={tweetsList.current} styles="individual-tweet-main"/>
             <h1 className="replies-header">Replies</h1>
-            <Feed tweetsList={repliesList} styles="replies"/>
+            <Feed tweetsList={repliesList.current} styles="replies"/>
         </div>
     );
 };

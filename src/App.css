@@ -2,8 +2,8 @@
     --main-bg-color: rgb(60, 60, 60);
     --search-bar-color: rgb(40, 40, 40);
     --search-box-color: rgb(50, 50, 50);
-    --main-button-color: rgb(0, 190, 190);
-    --main-button-hover-color: rgb(0, 255, 255);
+    --main-button-color: orange;
+    --main-button-hover-color: orange;
     --tweet-hover-border-color: rgba(30, 30, 30, 0.5);
     --tweet-hover-color: rgb(80,80,80);
     --create-tweet-color: rgb(55, 55, 55);
@@ -21,6 +21,17 @@
     padding: 0;
     color: white;
     font-size: 16px;
+}
+
+.logo {
+    height: 10vw;
+    width: 10vw;
+}
+
+.name {
+    color: orange;
+    font-size: xx-large;
+    text-align: center;
 }
 
 .link {
@@ -88,6 +99,8 @@
     margin-left: 5%;
     margin-right: 5%;
     padding: 2%;
+    width: 80vw;;
+
 }
 
 .feed-search .tweet-container .tweet-profile-image {
@@ -329,7 +342,6 @@
 .individual-tweet-wrapper {
     display: block;
     width: 80vw;
-    overflow-y: scroll;
     margin-bottom: 15vh;
     margin-top: 7vh;
 }
@@ -338,8 +350,9 @@
 /*********************** Replies ***********************/
 .replies {
     background-color: var(--main-bg-color);
-    height: auto;
+    height: 25vw;
     width: 80vw;
+    overflow-y: scroll;
     margin-top: 0;
 }
 
@@ -559,12 +572,15 @@
     height: 30vh;
     border-bottom: 1px solid var(--tweet-hover-border-color);
     padding-bottom: 1%;
+    overflow-wrap: true;
+    overflow-y: auto;
 }
 
 .profile-container {
     display: inline-block;
     font-size: 2em;
     padding: 5vh 5vw;
+
 }
 
 .profile h1 {
@@ -578,6 +594,8 @@
 .profile-wrapper .feed-search {
     height: 63vh;
     margin-top:0;
+    width: auto;
+
 }
 /************************************************************/
 
